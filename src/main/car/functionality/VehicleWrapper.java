@@ -1,5 +1,6 @@
 package car.functionality;
 
+import car.inventory.Dealership;
 import car.inventory.Vehicle;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class VehicleWrapper {
     private List<Vehicle> car_inventory;
+    private List<Dealership> dealers;
 
     public VehicleWrapper() {
     }
@@ -18,5 +20,18 @@ public class VehicleWrapper {
 
     public void setCar_inventory(ArrayList<Vehicle> car_inventory) {
         this.car_inventory = car_inventory;
+    }
+
+
+    public List<Dealership> getDealers() {
+        return dealers;
+    }
+
+    public void setDealers(List<Dealership> dealers) {
+        this.dealers = dealers;
+    }
+
+    public void addDealer(Dealership dealer) {
+        dealers.add(dealer);
     }
 }
