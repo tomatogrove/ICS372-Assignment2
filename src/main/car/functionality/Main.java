@@ -42,13 +42,13 @@ public class Main {
 
         switch (commandAndParameter[0]) {
             case "addIncomingVehicles":
-                List<Vehicle> vehicleList = new VehicleJSONParser().read(commandAndParameter[1]);
+                List<Vehicle> vehicleList = VehicleJSONParser.read(commandAndParameter[1]);
                 dealerGroup.addIncomingVehicles(vehicleList);
                 break;
             case "exportDealerVehicles":
                 dealer = getDealer(dealerGroup, commandAndParameter);
                 if (dealer != null) {
-                    new VehicleJSONParser().write(dealer);
+                    VehicleJSONParser.write(dealer);
                     System.out.println("Dealer " + dealer.getDealerID() + " vehicle's exported successfully!");
                 }
                 break;

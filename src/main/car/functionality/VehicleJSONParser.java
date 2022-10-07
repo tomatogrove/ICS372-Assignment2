@@ -12,15 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class VehicleJSONParser {
-	private final ObjectMapper mapper;
 
 
-	VehicleJSONParser() {
-		mapper = new ObjectMapper();
-	}
-
-
-	public List<Vehicle> read(String filePath) {
+	public static List<Vehicle> read(String filePath) {
+		ObjectMapper mapper = new ObjectMapper();
 		List<Vehicle> vehicleList = new ArrayList<>();
 		try {
 			vehicleList = mapper.readValue(new File(filePath), VehicleWrapper.class).getCar_inventory();
@@ -31,7 +26,8 @@ public class VehicleJSONParser {
 	}
 
 
-	public void write(Dealership dealer) {
+	public static void write(Dealership dealer) {
+		ObjectMapper mapper = new ObjectMapper();
 		String filePath = "./dealer" + dealer.getDealerID() + "Inventory.json";
 		File file = new File(filePath);
 		try {
