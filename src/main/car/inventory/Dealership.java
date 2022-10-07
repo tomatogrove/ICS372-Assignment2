@@ -8,6 +8,10 @@ public class Dealership {
     private boolean vehicleAcquisition;
     private Map<String, Vehicle> vehicleInventory;
 
+    /*
+        need new fields for dealer's name and if they are renting vehicles or not
+        also need getters/setters for these fields
+     */
     
     //getters
     public String getDealerID() {

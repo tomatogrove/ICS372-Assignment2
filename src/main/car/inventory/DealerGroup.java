@@ -10,12 +10,16 @@ public class DealerGroup {
 	public DealerGroup() {
 		this.dealers = new ArrayList<>();
 	}
+
+	public ArrayList<Dealership> getDealers() {
+		return dealers;
+	}
 	
 	public Dealership getDealerByID(String dealerID) {
 		Dealership getDealer = null;
 		for(int i = 0; i < dealers.size(); i++) {
 			if(dealerID.equalsIgnoreCase(dealers.get(i).getDealerID()) ) {
-			getDealer = dealers.get(i);
+				getDealer = dealers.get(i);
 			}
 		}
 		return getDealer;

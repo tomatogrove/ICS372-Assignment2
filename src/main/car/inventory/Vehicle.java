@@ -15,9 +15,17 @@ public class Vehicle {
 	private String vehicleModel;
 	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
+
+	/*
+		the price value may need to be changed to Java's Currency. Or it could be an Enum or two values.
+	 */
 	private Double price;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
+
+	/*
+		class will also need a "rented" boolean that needs a setter/getter
+	 */
 
 	//make Jackson happy
 	public Vehicle() {}
