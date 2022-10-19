@@ -1,0 +1,131 @@
+import javax.swing.*;
+
+public class DealershipUI {
+	static String dealerID = "";
+	
+	private static void makeDealerGUI() {
+	    //dealer information screen
+		JFrame dealerDetails = new JFrame("ICS372 Group 4 Assignment 2");
+		dealerDetails.setLayout(new GridLayout(3,1,0,10));
+		JPanel Options = new JPanel();
+		Options.setLayout(new GridLayout(5,3,10,10));
+		JPanel specificVehicle = new JPanel();
+		specificVehicle.setLayout(new GridLayout());
+		JLabel ID = new JLabel("Dealer: ID here");
+		JLabel Name = new JLabel("Name: ");
+		JLabel Renting = new JLabel("Renting: ");
+		JLabel Acquisition = new JLabel("Vehicle Acquisition: ");
+		JLabel Transfer = new JLabel("Transfer Inventory to: ");
+		JLabel Export = new JLabel("Export: ");
+		JTextField enterName = new JTextField("Dealer Name here");
+		JTextField transferInventory = new JTextField("Receiving Dealer ID here");
+		
+		JButton changeName = new JButton("save");
+		changeName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton disableRent = new JButton("disable");
+		disableRent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton enableRent = new JButton("enable");
+		enableRent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton disableAcquisition = new JButton("disable");
+		disableAcquisition.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton enableAcquisition = new JButton("enable");
+		enableAcquisition.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton transferAllVehicles = new JButton("transfer");
+		transferAllVehicles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton XMLExport = new JButton("XML");
+		XMLExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton JSONExport = new JButton("JSON");
+		JSONExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		JButton specificVehicleScreen = new JButton("Specific Vehicle");
+		specificVehicleScreen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		dealerDetails.add(ID);
+		
+		Options.add(Name);
+		Options.add(enterName);
+		Options.add(changeName);
+		
+		Options.add(Renting);
+		Options.add(enableRent);
+		Options.add(disableRent);
+		
+		Options.add(Acquisition);
+		Options.add(enableAcquisition);
+		Options.add(disableAcquisition);
+		
+		Options.add(Transfer);
+		Options.add(transferInventory);
+		Options.add(transferAllVehicles);
+		
+		Options.add(Export);
+		Options.add(XMLExport);
+		Options.add(JSONExport);
+		
+		Options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Dealer Details"));
+		
+		specificVehicle.add(specificVehicleScreen);
+		
+		dealerDetails.add(Options);
+		dealerDetails.add(specificVehicle);
+		
+		dealerDetails.pack();
+		dealerDetails.setVisible(false);
+
+
+		//dealer search screen
+		JFrame dealerSearch = new JFrame("Search for a dealer");
+	    JLabel dealerOfInterest = new JLabel("Dealer: ");
+	    JTextField searchTerm = new JTextField("enter dealer name here...");
+	    JButton search = new JButton("search");
+	    dealerSearch.add(dealerOfInterest);
+	    dealerSearch.add(searchTerm);
+	    dealerSearch.add(search);
+	    dealerSearch.setSize(500, 100);
+	    dealerSearch.setLayout(new GridLayout(1,3));
+	    dealerSearch.setVisible(true);
+	    search.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		dealerID = searchTerm.getText();
+	    		//search method to find Dealer
+	    		dealerSearch.setVisible(false);
+	    		dealerDetails.setVisible(true);
+	    	}
+	    });
+	}
+}
