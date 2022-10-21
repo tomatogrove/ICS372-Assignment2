@@ -1,8 +1,9 @@
 package car.inventory;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.util.Comparator;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Vehicle {
 	@JsonProperty("vehicle_id")
@@ -15,23 +16,28 @@ public class Vehicle {
 	private String vehicleModel;
 	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
-
-	/*
-		the price value may need to be changed to Java's Currency. Or it could be an Enum or two values.
-	 */
-	private Double price;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
 
 	/*
-		class will also need a "rented" boolean that needs a setter/getter
+	 * the price value may need to be changed to Java's Currency. Or it could be an
+	 * Enum or two values.
 	 */
+	private Double price;
+	private String unit;
 
-	//make Jackson happy
-	public Vehicle() {}
 
-	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
-			Double price, Date acquisitionDate) {
+	/*
+	 * class will also need a "rented" boolean that needs a setter/getter
+	 */
+	private boolean rentStatus = false;
+
+	// make Jackson happy
+	public Vehicle() {
+	}
+
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel,
+				   String vehicleManufacturer, Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -89,6 +95,14 @@ public class Vehicle {
 		this.price = price;
 	}
 
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
 	public Date getAcquisitionDate() {
 		return acquisitionDate;
 	}
@@ -97,17 +111,34 @@ public class Vehicle {
 		this.acquisitionDate = acquisitionDate;
 	}
 
+	public boolean getRentStatus() {
+		return rentStatus;
+	}
+
+	public void setRentStatus(boolean status) {
+		rentStatus = status;
+	}
+
+	public void setToRented() {
+		this.rentStatus = true;
+	}
+
+	public void setToNotRented() {
+		this.rentStatus = false;
+	}
+
+
 	@Override
 	public String toString() {
 
 		String summary = "Vehicle Information\n" + "---------------------------------------------------\n";
 		String heading = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", "Vehicle ID", "Dealership ID",
-				"Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Price", "Acquisition Date");
+				"Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Price", "Acquisition Date", "Rent Status");
 
 		String secondLine = "-----------------------------------------------------------------------------------------\n";
 
 		String info = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", vehicleID, dealershipID, vehicleType,
-				vehicleModel, vehicleManufacturer, price, acquisitionDate);
+				vehicleModel, vehicleManufacturer, price, acquisitionDate, rentStatus);
 
 		return summary + heading + secondLine + info;
 	}
