@@ -22,7 +22,7 @@ public class StateManager {
 
     public static void save(List<Dealership> dealers) {
         File storageFile = new File(storage);
-        VehicleXMLParser.writeAll(dealers, storageFile);
+        VehicleXMLParser.writeAll(storageFile, dealers);
     }
 
 }
