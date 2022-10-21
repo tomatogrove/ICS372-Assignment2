@@ -42,7 +42,7 @@ public class VehicleXMLParser {
         }
     }
 
-    public static void writeAll(List<Dealership> dealers, File file) {
+    public static void writeAll(File file, List<Dealership> dealers) {
         try {
             VehicleWrapper wrapper = new VehicleWrapper();
             wrapper.setDealers(dealers);

@@ -1,22 +1,52 @@
 package car.ui;
 
 import car.functionality.StateManager;
-import car.inventory.Dealership;
+import car.inventory.DealerGroup;
 
 import javax.swing.*;
-import java.util.List;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-/*
-    Need to include a window listener somewhere in here
- */
-public class NavigationManager {
+public class NavigationManager extends JFrame {
+    private static JPanel currentPanel;
+    private static JFrame frame;
+    //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
+    public static DealerGroup dealerGroup;
 
-    public static void backButton(JFrame frame) {
-        //navigate to previous screen and close the current one
+    //ensures that everything is set up on start so that the public methods don't access null values.
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(NavigationManager::setUpFrame);
     }
 
-    public static void exitProgram(List<Dealership> dealers) {
-        StateManager.save(dealers);
-        //exit program
+    private static void setUpFrame() {
+        dealerGroup = StateManager.load();
+
+        frame = new JFrame("The Container");
+        frame.setSize(500, 500);
+
+        // code found https://www.codejava.net/java-se/swing/preventing-jframe-window-from-closing
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                StateManager.save(dealerGroup.getDealers());
+                frame.dispose();
+            }
+        });
+
+        //placeholder for Pao's panel. Will change when Pao decides on a name
+        currentPanel = new WelcomePanel();
+        frame.add(currentPanel);
+
+        frame.setVisible(true);
+    }
+
+    public static void changePanel(JPanel newPanel) {
+        newPanel.setVisible(true);
+        currentPanel.setVisible(false);
+
+        frame.remove(currentPanel);
+        currentPanel = newPanel;
+
+        frame.add(currentPanel);
     }
 }
