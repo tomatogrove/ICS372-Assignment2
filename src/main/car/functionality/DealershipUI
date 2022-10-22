@@ -3,16 +3,16 @@ import java.awt.event.*;
 import java.util.Map;
 import javax.swing.*;
 
-public class DealershipUI {
+public class Test {
 	//Dealership object to test with called placeholder to bypass null pointer exception
 	private static final Dealership placeholder = new Dealership("test");
 	private static Dealership searchedDealer = placeholder;
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
-	    /*JFrame for testing
+	    /*
 		JFrame mainPanel = new JFrame();
 		mainPanel.setLayout(new FlowLayout());
-		mainPanel.setSize(500,500);
+		mainPanel.setSize(500,700);
 		*/
 		//navigation panel
 		JPanel navigation = new JPanel();
@@ -22,9 +22,7 @@ public class DealershipUI {
 		JPanel dealerDetails = new JPanel();
 		dealerDetails.setLayout(new GridLayout(3,1,0,10));
 		JPanel Options = new JPanel();
-		Options.setLayout(new GridLayout(5,3,10,10));
-		JPanel specificVehicle = new JPanel();
-		specificVehicle.setLayout(new GridLayout());
+		Options.setLayout(new GridLayout(6,3,10,10));
 		JLabel ID = new JLabel("Dealer: ID here");
 		JLabel Name = new JLabel("Name: ");
 		JLabel Renting = new JLabel("Renting: ");
@@ -80,16 +78,26 @@ public class DealershipUI {
 			}
 		});
 		
-		//export function that still needs work
-		JButton XMLExport = new JButton("XML");
-		XMLExport.setVisible(false);
-		//Ask about how to export this to JSON
+		
 		JButton JSONExport = new JButton("JSON");
 		JSONExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				searchedDealer.toString();
+				VehicleJSONParser.write(searchedDealer);
 			}
 		});
+		
+		
+		//invisible elements acting as padding to make the specific vehicle button not look massive. A lazy way of addressing the problem
+		JLabel filler1 = new JLabel("");
+		filler1.setVisible(false);
+		
+		JLabel filler2 = new JLabel("");
+		filler2.setVisible(false);
+		
+		JLabel filler3 = new JLabel("");
+		filler3.setVisible(false);
+		
+		//button that will transition to Mike's panel
 		JButton specificVehicleScreen = new JButton("Specific Vehicle");
 		specificVehicleScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,15 +124,17 @@ public class DealershipUI {
 		Options.add(transferAllVehicles);
 		
 		Options.add(Export);
-		Options.add(XMLExport);
 		Options.add(JSONExport);
+		Options.add(filler1);
+		
+		Options.add(filler2);
+		Options.add(specificVehicleScreen);
+		Options.add(filler3);
 		
 		Options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Dealer Details"));
 		
-		specificVehicle.add(specificVehicleScreen);
 		
 		dealerDetails.add(Options);
-		dealerDetails.add(specificVehicle);
 
 		dealerDetails.setVisible(false);
 
@@ -145,10 +155,10 @@ public class DealershipUI {
 	    	public void actionPerformed(ActionEvent e) {
 	    		//search method to find Dealer
 	    		searchedDealer = dealers.getDealerByID(searchTerm.getText());
-	    		//transition point between searching for dealer screen and dealer info screen. Both converted into JFrame panels
-	    		//mainPanel.remove(dealerSearch); test frame used here
+	    		//transition point between searching for dealer screen and dealer info screen. Both converted into Jpanel
+	    		//mainPanel.remove(dealerSearch);
 	    		dealerSearch.setVisible(false);
-	    		//mainPanel.add(dealerDetails); test frame used here
+	    		//mainPanel.add(dealerDetails);
 	    		dealerDetails.setVisible(true);
 	    	}
 	    });
@@ -160,8 +170,8 @@ public class DealershipUI {
 			public void actionPerformed(ActionEvent e) {
 				if(dealerDetails.isVisible()) {
 				dealerDetails.setVisible(false);
-				//mainPanel.remove(dealerDetails); test frame used here
-				//mainPanel.add(dealerSearch); test frame used here
+				//mainPanel.remove(dealerDetails);
+				//mainPanel.add(dealerSearch);
 				dealerSearch.setVisible(true);
 				} else {
 					//show panel preceding dealer search screen
@@ -173,14 +183,14 @@ public class DealershipUI {
 			public void actionPerformed(ActionEvent e) {
 				if(!dealerDetails.isVisible()) {
 				dealerSearch.setVisible(false);
-	    		//mainPanel.remove(dealerSearch); test frame used here
-	    		//mainPanel.add(dealerDetails); test frame used here
+	    		//mainPanel.remove(dealerSearch);
+	    		//mainPanel.add(dealerDetails);
 	    		dealerDetails.setVisible(true);
 				} else {
-					if(!searchedDealer.equals(placeholder)) {
-						//go forward to specific vehicle screen ONLY if a specific dealer has been searched for
-					} else if(searchedDealer.equals(placeholder)) {
+					if(searchedDealer.equals(placeholder)) {
 						//show a message to search for a dealer first
+					} else {
+						//go forward to specific vehicle screen ONLY if a specific dealer has been searched for
 					}
 				}
 			}
@@ -189,9 +199,9 @@ public class DealershipUI {
 		navigation.add(back);
 		navigation.add(forward);
 
-	    /*test frame used here to verify functionality
-	    mainPanel.add(navigation);
-	    mainPanel.add(dealerSearch);
-	    mainPanel.setVisible(true);
-	    */
+	    
+	    //mainPanel.add(navigation);
+	    //mainPanel.add(dealerSearch);
+	    //mainPanel.setVisible(true);
+	    
 	}
