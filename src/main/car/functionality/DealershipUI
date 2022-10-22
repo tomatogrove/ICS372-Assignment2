@@ -3,13 +3,13 @@ import java.awt.event.*;
 import java.util.Map;
 import javax.swing.*;
 
-public class Test {
+public class DealershipUI {
 	//Dealership object to test with called placeholder to bypass null pointer exception
 	private static final Dealership placeholder = new Dealership("test");
 	private static Dealership searchedDealer = placeholder;
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
-	    /*
+	    /* used for testing
 		JFrame mainPanel = new JFrame();
 		mainPanel.setLayout(new FlowLayout());
 		mainPanel.setSize(500,700);
@@ -82,7 +82,7 @@ public class Test {
 		JButton JSONExport = new JButton("JSON");
 		JSONExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VehicleJSONParser.write(searchedDealer);
+				//VehicleJSONParser.write(searchedDealer);
 			}
 		});
 		
@@ -101,7 +101,11 @@ public class Test {
 		JButton specificVehicleScreen = new JButton("Specific Vehicle");
 		specificVehicleScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//yet to be implemented when all GUI components are present. This is the transition point to Mike's GUI
+				//This is the transition point to Mike's GUI
+				dealerDetails.setVisible(false);
+				//mainPanel.remove(dealerDetails); used for testing
+				//mainPanel.add(Mike's panel name); (construction method may precede this if needed) used for testing
+				//Mike's panel name.setVisible(true); used for testing
 			}
 		});
 		
@@ -127,8 +131,8 @@ public class Test {
 		Options.add(JSONExport);
 		Options.add(filler1);
 		
-		Options.add(filler2);
 		Options.add(specificVehicleScreen);
+		Options.add(filler2);
 		Options.add(filler3);
 		
 		Options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Dealer Details"));
@@ -153,13 +157,19 @@ public class Test {
 	    dealerSearch.setVisible(true);
 	    search.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		//search method to find Dealer
+	    		//search method to find Dealer. Will return null if dealer is not found
+	    		if(dealers.getDealerByID(searchTerm.getText()).equals(null)) {
+	    			//show an error message that dealer does not exist
+	    			searchTerm.setText("Dealer does not exist...");
+	    		} else {
 	    		searchedDealer = dealers.getDealerByID(searchTerm.getText());
 	    		//transition point between searching for dealer screen and dealer info screen. Both converted into Jpanel
-	    		//mainPanel.remove(dealerSearch);
+	    		//mainPanel.remove(dealerSearch); used for testing
 	    		dealerSearch.setVisible(false);
-	    		//mainPanel.add(dealerDetails);
+	    		//mainPanel.add(dealerDetails); used for testing
 	    		dealerDetails.setVisible(true);
+	    		filler2.setVisible(false);
+	    		}
 	    	}
 	    });
 	    
@@ -170,11 +180,16 @@ public class Test {
 			public void actionPerformed(ActionEvent e) {
 				if(dealerDetails.isVisible()) {
 				dealerDetails.setVisible(false);
-				//mainPanel.remove(dealerDetails);
-				//mainPanel.add(dealerSearch);
+				//mainPanel.remove(dealerDetails); used for testing
+				//mainPanel.add(dealerSearch); used for testing
 				dealerSearch.setVisible(true);
-				} else {
-					//show panel preceding dealer search screen
+				} else if(dealerSearch.isVisible()){
+					//show panel preceding dealer search screen. The welcome panel that is commented out pending Iab's decision on naming the welcome panel
+					dealerSearch.setVisible(false);
+					searchTerm.setText("Enter Dealer ID...");
+					//mainPanel.remove(dealerSearch);
+					//mainPanel.add(welcomePanel);
+					//welcomePanel.setVisible(true);
 				}
 			}
 		});
@@ -183,14 +198,17 @@ public class Test {
 			public void actionPerformed(ActionEvent e) {
 				if(!dealerDetails.isVisible()) {
 				dealerSearch.setVisible(false);
-	    		//mainPanel.remove(dealerSearch);
-	    		//mainPanel.add(dealerDetails);
+	    		//mainPanel.remove(dealerSearch); used for testing
+	    		//mainPanel.add(dealerDetails); used for testing
 	    		dealerDetails.setVisible(true);
 				} else {
-					if(searchedDealer.equals(placeholder)) {
+					if(searchedDealer.equals(placeholder) || searchedDealer.equals(null)) {
 						//show a message to search for a dealer first
+						filler2.setText("Search for a dealer first!");
+						filler2.setVisible(true);
 					} else {
 						//go forward to specific vehicle screen ONLY if a specific dealer has been searched for
+						
 					}
 				}
 			}
@@ -199,9 +217,9 @@ public class Test {
 		navigation.add(back);
 		navigation.add(forward);
 
-	    
-	    //mainPanel.add(navigation);
-	    //mainPanel.add(dealerSearch);
-	    //mainPanel.setVisible(true);
-	    
+	    /* used for testing
+	    mainPanel.add(navigation);
+	    mainPanel.add(dealerSearch);
+	    mainPanel.setVisible(true);
+	    */
 	}
