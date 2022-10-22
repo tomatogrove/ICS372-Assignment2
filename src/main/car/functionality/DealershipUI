@@ -4,9 +4,20 @@ import java.util.Map;
 import javax.swing.*;
 
 public class DealershipUI {
-	private static Dealership searchedDealer = null;
+	//Dealership object to test with called placeholder to bypass null pointer exception
+	private static final Dealership placeholder = new Dealership("test");
+	private static Dealership searchedDealer = placeholder;
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
+	    /*JFrame for testing
+		JFrame mainPanel = new JFrame();
+		mainPanel.setLayout(new FlowLayout());
+		mainPanel.setSize(500,500);
+		*/
+		//navigation panel
+		JPanel navigation = new JPanel();
+		
+		
 	    //dealer information screen
 		JPanel dealerDetails = new JPanel();
 		dealerDetails.setLayout(new GridLayout(3,1,0,10));
@@ -123,19 +134,64 @@ public class DealershipUI {
 	    JLabel dealerOfInterest = new JLabel("Dealer: ");
 	    JTextField searchTerm = new JTextField("enter dealer name here...");
 	    JButton search = new JButton("search");
+	    dealerSearch.add(navigation);
 	    dealerSearch.add(dealerOfInterest);
 	    dealerSearch.add(searchTerm);
 	    dealerSearch.add(search);
 	    dealerSearch.setSize(500, 100);
-	    dealerSearch.setLayout(new GridLayout(1,3));
+	    dealerSearch.setLayout(new GridLayout(1,4));
 	    dealerSearch.setVisible(true);
 	    search.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		//search method to find Dealer
 	    		searchedDealer = dealers.getDealerByID(searchTerm.getText());
 	    		//transition point between searching for dealer screen and dealer info screen. Both converted into JFrame panels
+	    		//mainPanel.remove(dealerSearch); test frame used here
 	    		dealerSearch.setVisible(false);
+	    		//mainPanel.add(dealerDetails); test frame used here
 	    		dealerDetails.setVisible(true);
 	    	}
 	    });
+	    
+	    //navigation buttons added to the main frame handling the panels.
+	    //Needs a bit more work on both buttons to reach the other parts of the GUI outside of my 2 panels
+		JButton back = new JButton("Back");
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dealerDetails.isVisible()) {
+				dealerDetails.setVisible(false);
+				//mainPanel.remove(dealerDetails); test frame used here
+				//mainPanel.add(dealerSearch); test frame used here
+				dealerSearch.setVisible(true);
+				} else {
+					//show panel preceding dealer search screen
+				}
+			}
+		});
+		JButton forward = new JButton("Forward");
+		forward.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!dealerDetails.isVisible()) {
+				dealerSearch.setVisible(false);
+	    		//mainPanel.remove(dealerSearch); test frame used here
+	    		//mainPanel.add(dealerDetails); test frame used here
+	    		dealerDetails.setVisible(true);
+				} else {
+					if(!searchedDealer.equals(placeholder)) {
+						//go forward to specific vehicle screen ONLY if a specific dealer has been searched for
+					} else if(searchedDealer.equals(placeholder)) {
+						//show a message to search for a dealer first
+					}
+				}
+			}
+		});
+		
+		navigation.add(back);
+		navigation.add(forward);
+
+	    /*test frame used here to verify functionality
+	    mainPanel.add(navigation);
+	    mainPanel.add(dealerSearch);
+	    mainPanel.setVisible(true);
+	    */
 	}
