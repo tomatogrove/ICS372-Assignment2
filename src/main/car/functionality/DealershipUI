@@ -1,11 +1,14 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Map;
 import javax.swing.*;
 
 public class DealershipUI {
-	static String dealerID = "";
-	
-	private static void makeDealerGUI() {
+	private static Dealership searchedDealer = null;
+	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
+	private static void makeDealerGUI(DealerGroup dealers) {
 	    //dealer information screen
-		JFrame dealerDetails = new JFrame("ICS372 Group 4 Assignment 2");
+		JPanel dealerDetails = new JPanel();
 		dealerDetails.setLayout(new GridLayout(3,1,0,10));
 		JPanel Options = new JPanel();
 		Options.setLayout(new GridLayout(5,3,10,10));
@@ -19,59 +22,67 @@ public class DealershipUI {
 		JLabel Export = new JLabel("Export: ");
 		JTextField enterName = new JTextField("Dealer Name here");
 		JTextField transferInventory = new JTextField("Receiving Dealer ID here");
-		
+		//change name of dealer
 		JButton changeName = new JButton("save");
 		changeName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.setDealerName(enterName.getText());
 			}
 		});
+		//adjust rent boolean value of dealer
 		JButton disableRent = new JButton("disable");
 		disableRent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.disableRenting();
 			}
 		});
 		JButton enableRent = new JButton("enable");
 		enableRent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.enableRenting();
 			}
 		});
+		//adjust vehicle acquisition boolean value of dealer
 		JButton disableAcquisition = new JButton("disable");
 		disableAcquisition.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.enableDealerVehicleAcquisition();
 			}
 		});
 		JButton enableAcquisition = new JButton("enable");
 		enableAcquisition.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.disableDealerVehicleAcquisition();
 			}
 		});
+		//checks inventory for rented cars first before transferring entire inventory
 		JButton transferAllVehicles = new JButton("transfer");
 		transferAllVehicles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				for(Map.Entry<String, Vehicle> vehicle : searchedDealer.getVehicleInventory().entrySet()) {
+					if(searchedDealer.checkIfCarIsRented(vehicle.getValue())) {
+						//transfer did not occur because a vehicle in the dealer's inventory is rented
+						return;
+					}
+				}
+				dealers.transferInventory(searchedDealer.getDealerID(), transferInventory.getText());
 			}
 		});
+		
+		//export function that still needs work
 		JButton XMLExport = new JButton("XML");
-		XMLExport.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		XMLExport.setVisible(false);
+		//Ask about how to export this to JSON
 		JButton JSONExport = new JButton("JSON");
 		JSONExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				searchedDealer.toString();
 			}
 		});
 		JButton specificVehicleScreen = new JButton("Specific Vehicle");
 		specificVehicleScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//yet to be implemented when all GUI components are present. This is the transition point to Mike's GUI
 			}
 		});
 		
@@ -103,13 +114,12 @@ public class DealershipUI {
 		
 		dealerDetails.add(Options);
 		dealerDetails.add(specificVehicle);
-		
-		dealerDetails.pack();
+
 		dealerDetails.setVisible(false);
 
 
 		//dealer search screen
-		JFrame dealerSearch = new JFrame("Search for a dealer");
+		JPanel dealerSearch = new JPanel();
 	    JLabel dealerOfInterest = new JLabel("Dealer: ");
 	    JTextField searchTerm = new JTextField("enter dealer name here...");
 	    JButton search = new JButton("search");
@@ -121,11 +131,11 @@ public class DealershipUI {
 	    dealerSearch.setVisible(true);
 	    search.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		dealerID = searchTerm.getText();
 	    		//search method to find Dealer
+	    		searchedDealer = dealers.getDealerByID(searchTerm.getText());
+	    		//transition point between searching for dealer screen and dealer info screen. Both converted into JFrame panels
 	    		dealerSearch.setVisible(false);
 	    		dealerDetails.setVisible(true);
 	    	}
 	    });
 	}
-}
