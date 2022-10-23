@@ -27,7 +27,7 @@ public class DealerGroup {
 	
 	public String displayDealerVehicles() {
 		for(Dealership dealer : dealers) {
-			for(Vehicle vehicle : dealer.getVehicleInventory().values()) {
+			for(Vehicle vehicle : dealer.getVehicleInventory()) {
 				System.out.println(vehicle);
 			}
 		}
@@ -41,16 +41,17 @@ public class DealerGroup {
 				dealer = new Dealership(vehicle.getDealershipID());
 				dealers.add(dealer);
 			}
-			dealer.addIncomingVehicle(vehicle.getVehicleID(), vehicle);
+			dealer.addIncomingVehicle(vehicle);
 		}
 	}
 
-	public void transferInvetory(String d1, String d2) {
+	public void transferInventory(String d1, String d2) {
 		Dealership dealer1 = getDealerByID(d1);
 		Dealership dealer2 = getDealerByID(d2);
-		dealer2.getVehicleInventory().putAll(dealer1.getVehicleInventory());
+		for (Vehicle vehicle : dealer1.getVehicleInventory()) {
+			dealer2.addIncomingVehicle(vehicle);
+		}
 		dealer1.clearInventory();
 	}
-
 
 }

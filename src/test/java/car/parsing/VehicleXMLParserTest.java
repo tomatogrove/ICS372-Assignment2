@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleXMLParserTest {
 
-    private static final String REAL_FILE_PATH = "../../../resources/Dealers.xml";
+    private static final String REAL_FILE_PATH = "./src/test/resources/Dealers.xml";
     private static final Dealership DEALER = createTestDealership();
 
     @Test
@@ -22,8 +22,8 @@ class VehicleXMLParserTest {
 
         assertEquals(readDealer.get(0).getDealerID(), DEALER.getDealerID());
 
-        List<Vehicle> readVehicles = new ArrayList<>(readDealer.get(0).getVehicleInventory().values());
-        List<Vehicle> testVehicles = new ArrayList<>(DEALER.getVehicleInventory().values());
+        List<Vehicle> readVehicles = new ArrayList<>(readDealer.get(0).getVehicleInventory());
+        List<Vehicle> testVehicles = new ArrayList<>(DEALER.getVehicleInventory());
 
         for (int i = 0; i < readVehicles.size(); i++) {
             assertEquals(readVehicles.get(i).getVehicleID(), testVehicles.get(i).getVehicleID());
@@ -41,10 +41,10 @@ class VehicleXMLParserTest {
     private static Dealership createTestDealership() {
         Dealership dealer = new Dealership("485", "Wacky Bob’s Automall");
         Date now = new Date(System.currentTimeMillis());
-        dealer.addIncomingVehicle("848432",new Vehicle("848432", "485", "suv", "Range Rover", "Land Rover", 17000.0, "pounds", now));
-        dealer.addIncomingVehicle("52523", new Vehicle("52523", "485", "pickup", "Tundra", "Toyota", 22600.0, "dollars", now));
-        dealer.addIncomingVehicle("151e5dde", new Vehicle("151e5dde", "485", "sedan", "G70", "Genesis", 36600.0, "dollars", now));
-        dealer.addIncomingVehicle("ern222", new Vehicle("ern222", "485", "sports car", "Miata", "Mazda", 22330.0, "dollars", now));
+        dealer.addIncomingVehicle(new Vehicle("848432", "485", "suv", "Range Rover", "Land Rover", 17000.0, "pounds", now));
+        dealer.addIncomingVehicle(new Vehicle("52523", "485", "pickup", "Tundra", "Toyota", 22600.0, "dollars", now));
+        dealer.addIncomingVehicle(new Vehicle("151e5dde", "485", "sedan", "G70", "Genesis", 36600.0, "dollars", now));
+        dealer.addIncomingVehicle(new Vehicle("ern222", "485", "sports car", "Miata", "Mazda", 22330.0, "dollars", now));
 
         return dealer;
     }

@@ -3,6 +3,7 @@ package car.inventory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Vehicle {
 	@JsonProperty("vehicle_id")
@@ -132,4 +133,12 @@ public class Vehicle {
 		return summary + heading + secondLine + info;
 	}
 
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Vehicle vehicle = (Vehicle) o;
+		return vehicleID.equals(vehicle.vehicleID);
+	}
 }

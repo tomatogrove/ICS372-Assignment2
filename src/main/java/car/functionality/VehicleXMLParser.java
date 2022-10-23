@@ -19,7 +19,7 @@ public class VehicleXMLParser {
         List<Dealership> dealers = new ArrayList<>();
         Date now = new Date(System.currentTimeMillis());
         try {
-            dealers = mapper.readValue(file, VehicleXMLWrapper.class).getDealers();
+            dealers = mapper.readValue(file, VehicleXMLWrapper.class).getDealer();
 
             // sets default values for dealerId and vehicleAcquisitionDate
             for (Dealership dealer : dealers) {
@@ -36,7 +36,7 @@ public class VehicleXMLParser {
     public static void writeAll(File file, List<Dealership> dealers) {
         try {
             VehicleXMLWrapper wrapper = new VehicleXMLWrapper();
-            wrapper.setDealers(dealers);
+            wrapper.setDealer(dealers);
 
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, wrapper);
         } catch (IOException e) {
