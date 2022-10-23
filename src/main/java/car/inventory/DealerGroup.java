@@ -5,13 +5,13 @@ import java.util.List;
 
 public class DealerGroup {
 
-	private ArrayList<Dealership> dealers;
+	private List<Dealership> dealers;
 	
 	public DealerGroup() {
 		this.dealers = new ArrayList<>();
 	}
 
-	public ArrayList<Dealership> getDealers() {
+	public List<Dealership> getDealers() {
 		return dealers;
 	}
 	
@@ -42,6 +42,18 @@ public class DealerGroup {
 				dealers.add(dealer);
 			}
 			dealer.addIncomingVehicle(vehicle.getVehicleID(), vehicle);
+		}
+	}
+
+	// for use with XML files
+	public void addIncomingDealers(List<Dealership> dealers) {
+		for (Dealership dealer : dealers) {
+			if (getDealerByID(dealer.getDealerID()) != null) {
+				Dealership existingDealer = getDealerByID(dealer.getDealerID());
+				existingDealer.setName(dealer.getName());
+			}
+
+			addIncomingVehicles(new ArrayList<>(dealer.getVehicleInventory().values()));
 		}
 	}
 }

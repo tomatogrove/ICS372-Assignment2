@@ -1,9 +1,13 @@
 package car.inventory;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Dealership {
+    @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String dealerID;
     private boolean vehicleAcquisition;
     private Map<String, Vehicle> vehicleInventory;
@@ -12,6 +16,8 @@ public class Dealership {
         need new fields for dealer's name and if they are renting vehicles or not
         also need getters/setters for these fields
      */
+    private String name;
+    private boolean isRenting;
     
     //getters
     public String getDealerID() {
@@ -24,6 +30,18 @@ public class Dealership {
 
     public Map<String, Vehicle> getVehicleInventory() {
         return vehicleInventory;
+    }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    //for Jackson
+    public Dealership(){}
+
+    public Dealership(String dealerID, String name) {
+        this.dealerID = dealerID;
+        this.name = name;
     }
 
     public Dealership(String newDealer) {
@@ -67,4 +85,19 @@ public class Dealership {
         }
         return inventory;
     }
+
+    // These two methods are for Vehicles created by XML file.
+    // The current file input is missing the DealerId field and date of Vehicle Acquisition
+    public void setAllVehicleDealerIDs(String id) {
+        for (Vehicle vehicle: vehicleInventory.values()) {
+            vehicle.setDealershipID(id);
+        }
+    }
+
+    public void setAllVehicleAcquisitionDates(Date date) {
+        for (Vehicle vehicle: vehicleInventory.values()) {
+            vehicle.setAcquisitionDate(date);
+        }
+    }
+
 }

@@ -1,14 +1,17 @@
 package car.inventory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.Date;
 
 public class Vehicle {
+	@JacksonXmlProperty(isAttribute = true, localName = "id")
 	@JsonProperty("vehicle_id")
 	private String vehicleID;
 	@JsonProperty("dealership_id")
 	private String dealershipID;
+	@JacksonXmlProperty(isAttribute = true, localName = "type")
 	@JsonProperty("vehicle_type")
 	private String vehicleType;
 	@JsonProperty("vehicle_model")
@@ -19,6 +22,8 @@ public class Vehicle {
 	/*
 		the price value may need to be changed to Java's Currency. Or it could be an Enum or two values.
 	 */
+	private String unit;
+
 	private Double price;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
@@ -26,9 +31,22 @@ public class Vehicle {
 	/*
 		class will also need a "rented" boolean that needs a setter/getter
 	 */
+	private boolean rented;
 
 	//make Jackson happy
 	public Vehicle() {}
+
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
+		   Double price, String unit, Date acquisitionDate) {
+		this.vehicleID = vehicleID;
+		this.dealershipID = dealershipID;
+		this.vehicleType = vehicleType;
+		this.vehicleModel = vehicleModel;
+		this.vehicleManufacturer = vehicleManufacturer;
+		this.price = price;
+		this.unit = unit;
+		this.acquisitionDate = acquisitionDate;
+	}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
 			Double price, Date acquisitionDate) {
@@ -80,6 +98,9 @@ public class Vehicle {
 	public void setVehicleManufacturer(String vehicleManufacturer) {
 		this.vehicleManufacturer = vehicleManufacturer;
 	}
+	public String getUnit() { return unit; }
+
+	public void setUnit(String unit) { this.unit = unit; }
 
 	public Double getPrice() {
 		return price;
@@ -97,6 +118,10 @@ public class Vehicle {
 		this.acquisitionDate = acquisitionDate;
 	}
 
+	public boolean isRented() { return rented; }
+
+	public void setRented(boolean rented) { this.rented = rented; }
+
 	@Override
 	public String toString() {
 
@@ -111,5 +136,4 @@ public class Vehicle {
 
 		return summary + heading + secondLine + info;
 	}
-
 }
