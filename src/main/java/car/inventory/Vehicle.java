@@ -9,37 +9,17 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Vehicle {
-	@JacksonXmlProperty(isAttribute = true, localName = "id")
-	@JsonProperty("vehicle_id")
+
 	private String vehicleID;
-
-	@JsonProperty("dealership_id")
 	private String dealershipID;
-
-	@JacksonXmlProperty(isAttribute = true, localName = "type")
-	@JsonProperty("vehicle_type")
 	private String vehicleType;
-
-	@JacksonXmlProperty(localName = "Model")
-	@JsonProperty("vehicle_model")
 	private String vehicleModel;
-
-	@JacksonXmlProperty(localName = "Make")
-	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
-
 	private String unit;
 	private Double price;
-
-	@JacksonXmlProperty(localName = "Price")
-	private Price priceWrapper;
-
-	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
-
 	private boolean rented;
 
-	//make Jackson happy
 	public Vehicle() {}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
@@ -70,7 +50,6 @@ public class Vehicle {
 	public String getVehicleID() {
 		return vehicleID;
 	}
-
 	public void setVehicleID(String vehicleID) {
 		this.vehicleID = vehicleID;
 	}
@@ -78,7 +57,6 @@ public class Vehicle {
 	public String getDealershipID() {
 		return dealershipID;
 	}
-
 	public void setDealershipID(String dealershipID) {
 		this.dealershipID = dealershipID;
 	}
@@ -86,7 +64,6 @@ public class Vehicle {
 	public String getVehicleType() {
 		return vehicleType;
 	}
-
 	public void setVehicleType(String vehicleType) {
 		this.vehicleType = vehicleType;
 	}
@@ -94,7 +71,6 @@ public class Vehicle {
 	public String getVehicleModel() {
 		return vehicleModel;
 	}
-
 	public void setVehicleModel(String vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
@@ -102,42 +78,28 @@ public class Vehicle {
 	public String getVehicleManufacturer() {
 		return vehicleManufacturer;
 	}
-
 	public void setVehicleManufacturer(String vehicleManufacturer) {
 		this.vehicleManufacturer = vehicleManufacturer;
 	}
-	public String getUnit() { return unit; }
 
+	public String getUnit() { return unit; }
 	public void setUnit(String unit) { this.unit = unit; }
 
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public Price getPriceWrapper() {
-		return priceWrapper;
-	}
-
-	public void setPriceWrapper(Price priceWrapper) {
-		this.price = Double.valueOf(priceWrapper.getPrice());
-		this.unit = priceWrapper.getUnit();
-		this.priceWrapper = priceWrapper;
 	}
 
 	public Date getAcquisitionDate() {
 		return acquisitionDate;
 	}
-
 	public void setAcquisitionDate(Date acquisitionDate) {
 		this.acquisitionDate = acquisitionDate;
 	}
 
 	public boolean isRented() { return rented; }
-
 	public void setRented(boolean rented) { this.rented = rented; }
 
 	@Override
@@ -163,31 +125,5 @@ public class Vehicle {
 		if (o == null || getClass() != o.getClass()) return false;
 		Vehicle vehicle = (Vehicle) o;
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
-	}
-
-	// inner class that is needed for proper de/serialization of XML files
-	@JsonIgnoreProperties(ignoreUnknown = true)
-	static class Price {
-		@JacksonXmlProperty(isAttribute = true)
-		String unit;
-
-		@JacksonXmlText
-		String price;
-
-		public Price() { }
-
-		public String getUnit() {
-			return unit;
-		}
-		public void setUnit(String unit) {
-			this.unit = unit;
-		}
-
-		public String getPrice() {
-			return price;
-		}
-		public void setPrice(String price) {
-			this.price = price;
-		}
 	}
 }

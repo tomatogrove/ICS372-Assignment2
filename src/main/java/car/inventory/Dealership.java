@@ -1,32 +1,19 @@
 package car.inventory;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dealership {
-    @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String dealerID;
     private boolean vehicleAcquisition;
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "Vehicle")
     private List<Vehicle> vehicleInventory;
-
-    /*
-        need new fields for dealer's name and if they are renting vehicles or not
-        also need getters/setters for these fields
-     */
-    @JacksonXmlProperty(localName = "Name")
     private String name;
     private boolean isRenting;
 
-    //for Jackson
     public Dealership(){
         vehicleAcquisition = true;
         isRenting = false;
+        name = "N/A";
     }
 
     public Dealership(String dealerID, String name) {
@@ -44,17 +31,12 @@ public class Dealership {
         isRenting = false;
     }
 
-    // for Jackson
-    public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }
-
     public String getName() { return name; }
-
     public void setName(String name) { this.name = name; }
 
     public String getDealerID() {
         return dealerID;
     }
-
     public void setDealerID(String dealerID) { this.dealerID = dealerID; }
 
     public boolean isVehicleAcquisition() {
@@ -62,20 +44,28 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehicleInventory() { return vehicleInventory; }
+    public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }
 
     //methods
-    public boolean addIncomingVehicle(Vehicle vehicle) {
+    public void addIncomingVehicle(Vehicle vehicle) {
         if (vehicle.getVehicleType().equalsIgnoreCase("SUV") || vehicle.getVehicleType().equalsIgnoreCase("Sedan") || vehicle.getVehicleType().equalsIgnoreCase("Pickup") || vehicle.getVehicleType().equalsIgnoreCase("Sports Car")) {
             if (vehicleAcquisition) {
                 if (vehicleInventory.contains(vehicle)) {
-                    Vehicle removeVehicle = vehicleInventory.stream().filter((Vehicle v) -> v.getVehicleID().equals(vehicle.getVehicleID())).collect(Collectors.toList()).get(0);
+                    Vehicle removeVehicle = getVehicleById(vehicle.getVehicleID());
                     vehicleInventory.remove(removeVehicle);
                 }
                 vehicleInventory.add(vehicle);
-                return true;
             }
         }
-        return false;
+    }
+
+    private Vehicle getVehicleById(String vehicleID) {
+        for (Vehicle vehicle : vehicleInventory) {
+            if (vehicle.getVehicleID().equals(vehicleID)) {
+                return vehicle;
+            }
+        }
+        return null;
     }
 
     public void enableDealerVehicleAcquisition() {
@@ -93,20 +83,4 @@ public class Dealership {
         }
         return inventory;
     }
-
-    // These two methods are for Vehicles created by XML file.
-    // The current file input is missing the DealerId field and date of Vehicle Acquisition
-    public void setAllVehicleDealerIDs(String id) {
-        for (Vehicle vehicle: vehicleInventory) {
-            vehicle.setDealershipID(id);
-        }
-    }
-
-    public void setAllVehicleAcquisitionDates(Date date) {
-        for (Vehicle vehicle: vehicleInventory) {
-            vehicle.setAcquisitionDate(date);
-        }
-    }
-
-
 }

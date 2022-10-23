@@ -44,16 +44,4 @@ public class DealerGroup {
 			dealer.addIncomingVehicle(vehicle);
 		}
 	}
-
-	// for use with XML files
-	public void addIncomingDealers(List<Dealership> dealers) {
-		for (Dealership dealer : dealers) {
-			if (getDealerByID(dealer.getDealerID()) != null) {
-				Dealership existingDealer = getDealerByID(dealer.getDealerID());
-				existingDealer.setName(dealer.getName());
-			}
-
-			addIncomingVehicles(dealer.getVehicleInventory());
-		}
-	}
 }

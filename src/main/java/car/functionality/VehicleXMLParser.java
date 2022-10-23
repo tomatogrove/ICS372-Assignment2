@@ -17,31 +17,14 @@ public class VehicleXMLParser {
 
     public static List<Dealership> read(File file) {
         List<Dealership> dealers = new ArrayList<>();
-        Date now = new Date(System.currentTimeMillis());
         try {
-            dealers = mapper.readValue(file, VehicleXMLWrapper.class).getDealer();
+            dealers = mapper.readValue(file, VehicleXMLWrapper.class).getValidDealers();
 
-            // sets default values for dealerId and vehicleAcquisitionDate
-            for (Dealership dealer : dealers) {
-                dealer.setAllVehicleDealerIDs(dealer.getDealerID());
-                dealer.setAllVehicleAcquisitionDates(now);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return dealers;
-    }
-
-    public static void writeAll(File file, List<Dealership> dealers) {
-        try {
-            VehicleXMLWrapper wrapper = new VehicleXMLWrapper();
-            wrapper.setDealer(dealers);
-
-            mapper.writerWithDefaultPrettyPrinter().writeValue(file, wrapper);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     // from https://github.com/FasterXML/jackson-dataformat-xml/issues/219#issuecomment-286003056
