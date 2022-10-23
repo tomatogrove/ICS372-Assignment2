@@ -12,16 +12,8 @@ public class DealerGroup {
 		this.dealers = new ArrayList<>();
 	}
 
-	public ArrayList<Dealership> getDealergroup() {
+	public List<Dealership> getDealers() {
 		return dealers;
-	}
-
-	public String getDealers() {
-		String dealerInfo = "";
-		for(Dealership dealer : dealers) {
-			dealerInfo += dealer.toString();
-		}
-		return dealerInfo;
 	}
 
 	public Dealership getDealerByID(String dealerID) {

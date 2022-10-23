@@ -18,18 +18,8 @@ public class Vehicle {
 	private String vehicleManufacturer;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
-
-	/*
-	 * the price value may need to be changed to Java's Currency. Or it could be an
-	 * Enum or two values.
-	 */
 	private Double price;
 	private String unit;
-
-
-	/*
-	 * class will also need a "rented" boolean that needs a setter/getter
-	 */
 	private boolean rentStatus = false;
 
 	// make Jackson happy
@@ -118,15 +108,6 @@ public class Vehicle {
 	public void setRentStatus(boolean status) {
 		rentStatus = status;
 	}
-
-	public void setToRented() {
-		this.rentStatus = true;
-	}
-
-	public void setToNotRented() {
-		this.rentStatus = false;
-	}
-
 
 	@Override
 	public String toString() {
