@@ -10,7 +10,7 @@ public class DealershipUI {
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
 	    /* used for testing
-		JFrame mainPanel = new JFrame();
+		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new FlowLayout());
 		mainPanel.setSize(500,700);
 		*/
@@ -101,7 +101,7 @@ public class DealershipUI {
 		JButton specificVehicleScreen = new JButton("Specific Vehicle");
 		specificVehicleScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//This is the transition point to Mike's panel called "panel"
+				//This is a transition point to Mike's panel called "panel"
 				dealerDetails.setVisible(false);
 				//mainPanel.remove(dealerDetails); used for testing
 				//EditSpecificVehicle(); constructing Mike's panels
@@ -187,8 +187,9 @@ public class DealershipUI {
 				} else if(dealerSearch.isVisible()){
 					//show panel preceding dealer search screen. The welcome panel that is commented out pending Iab's decision on naming the welcome panel
 					dealerSearch.setVisible(false);
+					//mainPanel.setVisible(false);
 					searchTerm.setText("Enter Dealer ID...");
-					//mainPanel.remove(dealerSearch);
+					//mainPanel.remove(dealerSearch); May want to replace "mainPanel" with the name of the JFrame and remove the "mainPanel" JPanel instead of dealerSearch
 					//mainPanel.add(welcomePanel);
 					//welcomePanel.setVisible(true);
 				}
@@ -209,7 +210,12 @@ public class DealershipUI {
 						filler2.setVisible(true);
 					} else {
 						//go forward to specific vehicle screen ONLY if a specific dealer has been searched for
-						
+						//This is the transition point to Mike's panel called "panel"
+					dealerDetails.setVisible(false);
+					//mainPanel.setVisible(false);
+					//mainPanel.remove(dealerDetails); May want to replace "mainPanel" with the name of the JFrame and remove the "mainPanel" JPanel instead of dealerDetails
+					//mainPanel.add(panel); used for testing
+					//panel.setVisible(true); used for testing
 					}
 				}
 			}
@@ -218,9 +224,8 @@ public class DealershipUI {
 		navigation.add(back);
 		navigation.add(forward);
 
-	    /* used for testing
 	    mainPanel.add(navigation);
 	    mainPanel.add(dealerSearch);
 	    mainPanel.setVisible(true);
-	    */
+	    
 	}
