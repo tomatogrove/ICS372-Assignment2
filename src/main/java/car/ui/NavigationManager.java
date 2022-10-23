@@ -1,6 +1,6 @@
 package car.ui;
 
-import car.functionality.StateManager;
+import car.storage.StateManager;
 import car.inventory.DealerGroup;
 
 import javax.swing.*;

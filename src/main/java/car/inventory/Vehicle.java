@@ -1,9 +1,8 @@
 package car.inventory;
 
-import java.util.Comparator;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 
 public class Vehicle {
 	@JsonProperty("vehicle_id")
@@ -16,28 +15,31 @@ public class Vehicle {
 	private String vehicleModel;
 	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
+	private String unit;
+
+	private Double price;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
 
-	/*
-	 * the price value may need to be changed to Java's Currency. Or it could be an
-	 * Enum or two values.
-	 */
-	private Double price;
-	private String unit;
+	private boolean rented;
 
+	//make Jackson happy
+	public Vehicle() {}
 
-	/*
-	 * class will also need a "rented" boolean that needs a setter/getter
-	 */
-	private boolean rentStatus = false;
-
-	// make Jackson happy
-	public Vehicle() {
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
+		   Double price, String unit, Date acquisitionDate) {
+		this.vehicleID = vehicleID;
+		this.dealershipID = dealershipID;
+		this.vehicleType = vehicleType;
+		this.vehicleModel = vehicleModel;
+		this.vehicleManufacturer = vehicleManufacturer;
+		this.price = price;
+		this.unit = unit;
+		this.acquisitionDate = acquisitionDate;
 	}
 
-	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel,
-				   String vehicleManufacturer, Double price, Date acquisitionDate) {
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
+			Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -111,22 +113,9 @@ public class Vehicle {
 		this.acquisitionDate = acquisitionDate;
 	}
 
-	public boolean getRentStatus() {
-		return rentStatus;
-	}
+	public boolean isRented() { return rented; }
 
-	public void setRentStatus(boolean status) {
-		rentStatus = status;
-	}
-
-	public void setToRented() {
-		this.rentStatus = true;
-	}
-
-	public void setToNotRented() {
-		this.rentStatus = false;
-	}
-
+	public void setRented(boolean rented) { this.rented = rented; }
 
 	@Override
 	public String toString() {

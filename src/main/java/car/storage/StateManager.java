@@ -1,8 +1,8 @@
-package car.functionality;
+package car.storage;
 
+import car.functionality.VehicleXMLParser;
 import car.inventory.DealerGroup;
 import car.inventory.Dealership;
-import car.inventory.Vehicle;
 
 import java.io.File;
 import java.util.List;
@@ -13,9 +13,9 @@ public class StateManager {
 
     public static DealerGroup load() {
         DealerGroup dealerGroup = new DealerGroup();
-        List<Vehicle> vehicles = VehicleXMLParser.read(storage);
+        List<Dealership> dealers = VehicleXMLParser.read(storage);
 
-        dealerGroup.addIncomingVehicles(vehicles);
+        dealerGroup.addIncomingDealers(dealers);
 
         return dealerGroup;
     }

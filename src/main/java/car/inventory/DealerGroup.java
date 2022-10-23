@@ -2,28 +2,19 @@ package car.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class DealerGroup {
 
-	private ArrayList<Dealership> dealers;
-
+	private List<Dealership> dealers;
+	
 	public DealerGroup() {
 		this.dealers = new ArrayList<>();
 	}
 
-	public ArrayList<Dealership> getDealergroup() {
+	public List<Dealership> getDealers() {
 		return dealers;
 	}
-
-	public String getDealers() {
-		String dealerInfo = "";
-		for(Dealership dealer : dealers) {
-			dealerInfo += dealer.toString();
-		}
-		return dealerInfo;
-	}
-
+	
 	public Dealership getDealerByID(String dealerID) {
 		Dealership getDealer = null;
 		for(int i = 0; i < dealers.size(); i++) {
@@ -33,7 +24,7 @@ public class DealerGroup {
 		}
 		return getDealer;
 	}
-
+	
 	public String displayDealerVehicles() {
 		for(Dealership dealer : dealers) {
 			for(Vehicle vehicle : dealer.getVehicleInventory().values()) {
