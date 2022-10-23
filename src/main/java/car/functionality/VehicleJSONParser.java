@@ -15,17 +15,17 @@ public class VehicleJSONParser {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
-	public static List<Vehicle> read(String filePath) {
+	public static List<Vehicle> read(File file) {
 		List<Vehicle> vehicleList = new ArrayList<>();
 		try {
-			vehicleList = mapper.readValue(new File(filePath), VehicleJSONWrapper.class).getCar_inventory();
+			vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getCar_inventory();
 
 			// sets a default unit of dollars
 			for (Vehicle vehicle : vehicleList) {
 				vehicle.setUnit("dollars");
 			}
 		} catch (IOException e) {
-			System.out.println("File not found or invalid format.");
+			e.printStackTrace();
 		}
 		return vehicleList;
 	}
