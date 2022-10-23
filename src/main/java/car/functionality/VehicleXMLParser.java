@@ -2,6 +2,7 @@ package car.functionality;
 
 import car.inventory.Dealership;
 
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
@@ -12,9 +13,10 @@ import java.util.List;
 
 public class VehicleXMLParser {
 
-    private static final XmlMapper mapper = new XmlMapper();
+    private static final XmlMapper mapper = createMapper();
 
     public static List<Dealership> read(String filePath) {
+
         File file = new File(filePath);
         List<Dealership> dealers = new ArrayList<>();
         Date now = new Date(System.currentTimeMillis());
@@ -42,5 +44,12 @@ public class VehicleXMLParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // from https://github.com/FasterXML/jackson-dataformat-xml/issues/219#issuecomment-286003056
+    private static XmlMapper createMapper() {
+        JacksonXmlModule module = new JacksonXmlModule();
+        module.setDefaultUseWrapper(false);
+        return new XmlMapper(module);
     }
 }

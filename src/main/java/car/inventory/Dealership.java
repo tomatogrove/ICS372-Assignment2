@@ -1,5 +1,6 @@
 package car.inventory;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -10,19 +11,25 @@ public class Dealership {
     @JacksonXmlProperty(isAttribute = true, localName = "id")
     private String dealerID;
     private boolean vehicleAcquisition;
-    @JacksonXmlElementWrapper(useWrapping = false, localName = "Vehicle")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "Vehicle")
     private List<Vehicle> vehicleInventory;
 
     /*
         need new fields for dealer's name and if they are renting vehicles or not
         also need getters/setters for these fields
      */
+    @JacksonXmlProperty(localName = "Name")
     private String name;
     private boolean isRenting;
     
     //getters
     public String getDealerID() {
         return dealerID;
+    }
+
+    public void setDealerID(String dealerID) {
+        this.dealerID = dealerID;
     }
 
     public boolean isVehicleAcquisition() {
@@ -33,12 +40,19 @@ public class Dealership {
         return vehicleInventory;
     }
 
+    // for Jackson
+    public void setVehicleInventory(List<Vehicle> vehicleInventory) {
+        this.vehicleInventory = vehicleInventory;
+    }
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
     //for Jackson
-    public Dealership(){}
+    public Dealership(){
+        vehicleAcquisition = true;
+    }
 
     public Dealership(String dealerID, String name) {
         this.dealerID = dealerID;

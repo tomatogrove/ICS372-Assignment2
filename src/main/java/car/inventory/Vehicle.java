@@ -1,7 +1,9 @@
 package car.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.Date;
 import java.util.Objects;
@@ -10,22 +12,32 @@ public class Vehicle {
 	@JacksonXmlProperty(isAttribute = true, localName = "id")
 	@JsonProperty("vehicle_id")
 	private String vehicleID;
+
 	@JsonProperty("dealership_id")
 	private String dealershipID;
+
 	@JacksonXmlProperty(isAttribute = true, localName = "type")
 	@JsonProperty("vehicle_type")
 	private String vehicleType;
+
+	@JacksonXmlProperty(localName = "Model")
 	@JsonProperty("vehicle_model")
 	private String vehicleModel;
+
+	@JacksonXmlProperty(localName = "Make")
 	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
 
 	/*
 		the price value may need to be changed to Java's Currency. Or it could be an Enum or two values.
 	 */
+
 	private String unit;
 
 	private Double price;
+
+	@JacksonXmlProperty(localName = "Price")
+	private Price priceWrapper;
 
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
@@ -112,6 +124,16 @@ public class Vehicle {
 		this.price = price;
 	}
 
+	public Price getPriceWrapper() {
+		return priceWrapper;
+	}
+
+	public void setPriceWrapper(Price priceWrapper) {
+		this.price = Double.valueOf(priceWrapper.getPrice());
+		this.unit = priceWrapper.getUnit();
+		this.priceWrapper = priceWrapper;
+	}
+
 	public Date getAcquisitionDate() {
 		return acquisitionDate;
 	}
@@ -146,5 +168,33 @@ public class Vehicle {
 		if (o == null || getClass() != o.getClass()) return false;
 		Vehicle vehicle = (Vehicle) o;
 		return vehicleID.equals(vehicle.vehicleID);
+	}
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	static class Price {
+		@JacksonXmlProperty(isAttribute = true)
+		String unit;
+
+		@JacksonXmlText
+		String price;
+
+		public Price() {
+		}
+
+		public String getUnit() {
+			return unit;
+		}
+
+		public void setUnit(String unit) {
+			this.unit = unit;
+		}
+
+		public String getPrice() {
+			return price;
+		}
+
+		public void setPrice(String price) {
+			this.price = price;
+		}
 	}
 }
