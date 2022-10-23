@@ -10,8 +10,7 @@ import java.awt.event.WindowEvent;
 public class NavigationManager extends JFrame {
     private static JPanel currentPanel;
     private static JFrame frame;
-    //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
-    public static DealerGroup dealerGroup;
+
 
     //ensures that everything is set up on start so that the public methods don't access null values.
     public static void main(String[] args) {
@@ -19,7 +18,7 @@ public class NavigationManager extends JFrame {
     }
 
     private static void setUpFrame() {
-        dealerGroup = StateManager.load();
+        StateManager.load();
 
         frame = new JFrame("The Container");
         frame.setSize(500, 500);
@@ -28,7 +27,7 @@ public class NavigationManager extends JFrame {
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                StateManager.save(dealerGroup.getDealers());
+                StateManager.save();
                 frame.dispose();
             }
         });

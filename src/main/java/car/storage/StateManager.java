@@ -9,20 +9,19 @@ import java.util.List;
 
 public class StateManager {
 
+    //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
+    public static DealerGroup dealerGroup;
     private static final String storage = "../storage/programState.XML";
 
-    public static DealerGroup load() {
-        DealerGroup dealerGroup = new DealerGroup();
+    public static void load() {
         List<Dealership> dealers = VehicleXMLParser.read(storage);
 
-        dealerGroup.addIncomingDealers(dealers);
-
-        return dealerGroup;
+        StateManager.dealerGroup.addIncomingDealers(dealers);
     }
 
-    public static void save(List<Dealership> dealers) {
+    public static void save() {
         File storageFile = new File(storage);
-        VehicleXMLParser.writeAll(storageFile, dealers);
+        VehicleXMLParser.writeAll(storageFile, StateManager.dealerGroup.getDealers());
     }
 
 }
