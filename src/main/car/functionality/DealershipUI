@@ -82,7 +82,7 @@ public class DealershipUI {
 		JButton JSONExport = new JButton("JSON");
 		JSONExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//VehicleJSONParser.write(searchedDealer);
+				VehicleJSONParser.write(searchedDealer);
 			}
 		});
 		
