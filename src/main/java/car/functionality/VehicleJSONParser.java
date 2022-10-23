@@ -38,7 +38,7 @@ public class VehicleJSONParser {
 			file.createNewFile();
 
 			VehicleJSONWrapper wrapper = new VehicleJSONWrapper();
-			wrapper.setCar_inventory(new ArrayList<>(dealer.getVehicleInventory().values()));
+			wrapper.setCar_inventory(new ArrayList<>(dealer.getVehicleInventory()));
 
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, wrapper);
 		} catch (IOException e) {

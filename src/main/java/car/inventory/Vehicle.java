@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Vehicle {
 	@JacksonXmlProperty(isAttribute = true, localName = "id")
@@ -25,6 +26,7 @@ public class Vehicle {
 	private String unit;
 
 	private Double price;
+
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
 
@@ -135,5 +137,14 @@ public class Vehicle {
 				vehicleModel, vehicleManufacturer, price, acquisitionDate);
 
 		return summary + heading + secondLine + info;
+	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Vehicle vehicle = (Vehicle) o;
+		return vehicleID.equals(vehicle.vehicleID);
 	}
 }

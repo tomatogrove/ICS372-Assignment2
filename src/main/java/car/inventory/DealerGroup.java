@@ -27,7 +27,7 @@ public class DealerGroup {
 	
 	public String displayDealerVehicles() {
 		for(Dealership dealer : dealers) {
-			for(Vehicle vehicle : dealer.getVehicleInventory().values()) {
+			for(Vehicle vehicle : dealer.getVehicleInventory()) {
 				System.out.println(vehicle);
 			}
 		}
@@ -41,7 +41,7 @@ public class DealerGroup {
 				dealer = new Dealership(vehicle.getDealershipID());
 				dealers.add(dealer);
 			}
-			dealer.addIncomingVehicle(vehicle.getVehicleID(), vehicle);
+			dealer.addIncomingVehicle(vehicle);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class DealerGroup {
 				existingDealer.setName(dealer.getName());
 			}
 
-			addIncomingVehicles(new ArrayList<>(dealer.getVehicleInventory().values()));
+			addIncomingVehicles(dealer.getVehicleInventory());
 		}
 	}
 }
