@@ -1,30 +1,19 @@
 package car.inventory;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Date;
-import java.util.Objects;
 
 public class Vehicle {
-	@JsonProperty("vehicle_id")
-	private String vehicleID;
-	@JsonProperty("dealership_id")
-	private String dealershipID;
-	@JsonProperty("vehicle_type")
-	private String vehicleType;
-	@JsonProperty("vehicle_model")
-	private String vehicleModel;
-	@JsonProperty("vehicle_manufacturer")
-	private String vehicleManufacturer;
 
+	private String vehicleID;
+	private String dealershipID;
+	private String vehicleType;
+	private String vehicleModel;
+	private String vehicleManufacturer;
 	private String unit;
 	private Double price;
-	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
-
 	private boolean rented;
 
-	//make Jackson happy
 	public Vehicle() {}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
@@ -55,7 +44,6 @@ public class Vehicle {
 	public String getVehicleID() {
 		return vehicleID;
 	}
-
 	public void setVehicleID(String vehicleID) {
 		this.vehicleID = vehicleID;
 	}
@@ -63,7 +51,6 @@ public class Vehicle {
 	public String getDealershipID() {
 		return dealershipID;
 	}
-
 	public void setDealershipID(String dealershipID) {
 		this.dealershipID = dealershipID;
 	}
@@ -71,7 +58,6 @@ public class Vehicle {
 	public String getVehicleType() {
 		return vehicleType;
 	}
-
 	public void setVehicleType(String vehicleType) {
 		this.vehicleType = vehicleType;
 	}
@@ -79,7 +65,6 @@ public class Vehicle {
 	public String getVehicleModel() {
 		return vehicleModel;
 	}
-
 	public void setVehicleModel(String vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
@@ -87,37 +72,28 @@ public class Vehicle {
 	public String getVehicleManufacturer() {
 		return vehicleManufacturer;
 	}
-
 	public void setVehicleManufacturer(String vehicleManufacturer) {
 		this.vehicleManufacturer = vehicleManufacturer;
 	}
 
+	public String getUnit() { return unit; }
+	public void setUnit(String unit) { this.unit = unit; }
+
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-	public String getUnit() {
-		return unit;
 	}
 
 	public Date getAcquisitionDate() {
 		return acquisitionDate;
 	}
-
 	public void setAcquisitionDate(Date acquisitionDate) {
 		this.acquisitionDate = acquisitionDate;
 	}
 
 	public boolean isRented() { return rented; }
-
 	public void setRented(boolean rented) { this.rented = rented; }
 
 	@Override

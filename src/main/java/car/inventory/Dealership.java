@@ -1,23 +1,19 @@
 package car.inventory;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
-import java.util.Date;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dealership {
     private String dealerID;
     private boolean vehicleAcquisition;
     private List<Vehicle> vehicleInventory;
-
     private String name;
     private boolean isRenting;
 
-    //for Jackson
     public Dealership(){
         vehicleAcquisition = true;
         isRenting = false;
+        name = "N/A";
     }
 
     public Dealership(String dealerID, String name) {
@@ -35,17 +31,12 @@ public class Dealership {
         isRenting = false;
     }
 
-    // for Jackson
-    public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }
-
     public String getName() { return name; }
-
     public void setName(String name) { this.name = name; }
 
     public String getDealerID() {
         return dealerID;
     }
-
     public void setDealerID(String dealerID) { this.dealerID = dealerID; }
 
     public boolean isVehicleAcquisition() {
@@ -53,20 +44,28 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehicleInventory() { return vehicleInventory; }
+    public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }
 
     //methods
-    public boolean addIncomingVehicle(Vehicle vehicle) {
+    public void addIncomingVehicle(Vehicle vehicle) {
         if (vehicle.getVehicleType().equalsIgnoreCase("SUV") || vehicle.getVehicleType().equalsIgnoreCase("Sedan") || vehicle.getVehicleType().equalsIgnoreCase("Pickup") || vehicle.getVehicleType().equalsIgnoreCase("Sports Car")) {
             if (vehicleAcquisition) {
                 if (vehicleInventory.contains(vehicle)) {
-                    Vehicle removeVehicle = vehicleInventory.stream().filter((Vehicle v) -> v.getVehicleID().equals(vehicle.getVehicleID())).collect(Collectors.toList()).get(0);
+                    Vehicle removeVehicle = getVehicleById(vehicle.getVehicleID());
                     vehicleInventory.remove(removeVehicle);
                 }
                 vehicleInventory.add(vehicle);
-                return true;
             }
         }
-        return false;
+    }
+
+    private Vehicle getVehicleById(String vehicleID) {
+        for (Vehicle vehicle : vehicleInventory) {
+            if (vehicle.getVehicleID().equals(vehicleID)) {
+                return vehicle;
+            }
+        }
+        return null;
     }
 
     public void enableDealerVehicleAcquisition() {
@@ -88,3 +87,4 @@ public class Dealership {
     public void clearInventory() {
         vehicleInventory.clear();
     }
+}

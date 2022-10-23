@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import car.inventory.DealerGroup;
 import car.inventory.Dealership;
 import car.inventory.Vehicle;
 
@@ -18,12 +19,7 @@ public class VehicleJSONParser {
 	public static List<Vehicle> read(File file) {
 		List<Vehicle> vehicleList = new ArrayList<>();
 		try {
-			vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getCar_inventory();
-
-			// sets a default unit of dollars
-			for (Vehicle vehicle : vehicleList) {
-				vehicle.setUnit("dollars");
-			}
+			vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getVehicles();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,15 +31,27 @@ public class VehicleJSONParser {
 		String filePath = "./dealer" + dealer.getDealerID() + "Inventory.json";
 		File file = new File(filePath);
 		try {
-			file.createNewFile();
-
-			VehicleJSONWrapper wrapper = new VehicleJSONWrapper();
-			wrapper.setCar_inventory(new ArrayList<>(dealer.getVehicleInventory()));
-
-			mapper.writerWithDefaultPrettyPrinter().writeValue(file, wrapper);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public static DealerGroup readAll(File file) {
+		DealerGroup dealerGroup = new DealerGroup();
+		try {
+			dealerGroup = mapper.readValue(file, DealerGroup.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dealerGroup;
+	}
+
+	public static void writeAll(File file, DealerGroup dealerGroup) {
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealerGroup);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
