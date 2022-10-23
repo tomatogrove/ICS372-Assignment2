@@ -15,9 +15,7 @@ public class VehicleXMLParser {
 
     private static final XmlMapper mapper = createMapper();
 
-    public static List<Dealership> read(String filePath) {
-
-        File file = new File(filePath);
+    public static List<Dealership> read(File file) {
         List<Dealership> dealers = new ArrayList<>();
         Date now = new Date(System.currentTimeMillis());
         try {

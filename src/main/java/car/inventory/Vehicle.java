@@ -16,8 +16,8 @@ public class Vehicle {
 	private String vehicleModel;
 	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
-	private String unit;
 
+	private String unit;
 	private Double price;
 	@JsonProperty("acquisition_date")
 	private Date acquisitionDate;
@@ -37,6 +37,7 @@ public class Vehicle {
 		this.price = price;
 		this.unit = unit;
 		this.acquisitionDate = acquisitionDate;
+		rented = false;
 	}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
@@ -48,6 +49,7 @@ public class Vehicle {
 		this.vehicleManufacturer = vehicleManufacturer;
 		this.price = price;
 		this.acquisitionDate = acquisitionDate;
+		rented = false;
 	}
 
 	public String getVehicleID() {
@@ -134,11 +136,12 @@ public class Vehicle {
 	}
 
 
+	// vehicle is equal if the vehicleID and dealerShipID are the same
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Vehicle vehicle = (Vehicle) o;
-		return vehicleID.equals(vehicle.vehicleID);
+		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
 }

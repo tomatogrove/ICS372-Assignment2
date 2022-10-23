@@ -11,7 +11,7 @@ public class StateManager {
 
     //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
     public static DealerGroup dealerGroup;
-    private static final String storage = "../storage/programState.XML";
+    private static final File storage = new File("../storage/programState.XML");
 
     public static void load() {
         List<Dealership> dealers = VehicleXMLParser.read(storage);
@@ -20,8 +20,7 @@ public class StateManager {
     }
 
     public static void save() {
-        File storageFile = new File(storage);
-        VehicleXMLParser.writeAll(storageFile, StateManager.dealerGroup.getDealers());
+        VehicleXMLParser.writeAll(storage, StateManager.dealerGroup.getDealers());
     }
 
 }

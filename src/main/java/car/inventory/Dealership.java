@@ -14,32 +14,10 @@ public class Dealership {
     private String name;
     private boolean isRenting;
 
-    //getters
-
-    public void setDealerID(String dealerID) {
-        this.dealerID = dealerID;
-    }
-
-    public boolean isVehicleAcquisition() {
-        return vehicleAcquisition;
-    }
-
-    public List<Vehicle> getVehicleInventory() {
-        return vehicleInventory;
-    }
-
-    // for Jackson
-    public void setVehicleInventory(List<Vehicle> vehicleInventory) {
-        this.vehicleInventory = vehicleInventory;
-    }
-
-    public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
-
     //for Jackson
     public Dealership(){
         vehicleAcquisition = true;
+        isRenting = false;
     }
 
     public Dealership(String dealerID, String name) {
@@ -47,39 +25,35 @@ public class Dealership {
         this.name = name;
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
+        isRenting = false;
     }
 
     public Dealership(String newDealer) {
         dealerID = newDealer;
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
+        isRenting = false;
     }
-    //constructors
-    public Dealership(String dealerID, boolean vehicleAcquisition, List<Vehicle> vehicleInventory) {
-        this.dealerID = dealerID;
-        this.vehicleAcquisition = vehicleAcquisition;
-        this.vehicleInventory = vehicleInventory;
-    }
+
+    // for Jackson
+    public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public String getDealerID() {
         return dealerID;
     }
 
-    public String getDealerName() {
-        return dealerName;
-    }
+    public void setDealerID(String dealerID) { this.dealerID = dealerID; }
 
-    public void setDealerName(String newName) {
-        this.dealerName = newName;
-    }
-
-    public boolean getIsRenting() {
-        return rentStatus;
-    }
-
-    public boolean getVehicleAcquisition() {
+    public boolean isVehicleAcquisition() {
         return vehicleAcquisition;
     }
+
+    public List<Vehicle> getVehicleInventory() { return vehicleInventory; }
+
     //methods
     public boolean addIncomingVehicle(Vehicle vehicle) {
         if (vehicle.getVehicleType().equalsIgnoreCase("SUV") || vehicle.getVehicleType().equalsIgnoreCase("Sedan") || vehicle.getVehicleType().equalsIgnoreCase("Pickup") || vehicle.getVehicleType().equalsIgnoreCase("Sports Car")) {
