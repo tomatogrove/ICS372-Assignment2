@@ -101,11 +101,12 @@ public class DealershipUI {
 		JButton specificVehicleScreen = new JButton("Specific Vehicle");
 		specificVehicleScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//This is the transition point to Mike's GUI
+				//This is the transition point to Mike's panel called "panel"
 				dealerDetails.setVisible(false);
 				//mainPanel.remove(dealerDetails); used for testing
-				//mainPanel.add(Mike's panel name); (construction method may precede this if needed) used for testing
-				//Mike's panel name.setVisible(true); used for testing
+				//EditSpecificVehicle(); constructing Mike's panels
+				//mainPanel.add(panel); used for testing
+				//panel.setVisible(true); used for testing
 			}
 		});
 		
