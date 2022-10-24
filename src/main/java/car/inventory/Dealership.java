@@ -6,9 +6,9 @@ import java.util.List;
 public class Dealership {
     private String dealerID;
     private boolean vehicleAcquisition;
-    private List<Vehicle> vehicleInventory;
     private String name;
     private boolean isRenting;
+    private List<Vehicle> vehicleInventory;
 
     public Dealership(){
         vehicleAcquisition = true;
@@ -42,6 +42,9 @@ public class Dealership {
     public boolean isVehicleAcquisition() {
         return vehicleAcquisition;
     }
+
+    public boolean isRenting() { return isRenting; }
+    public void setRenting(boolean renting) { isRenting = renting; }
 
     public List<Vehicle> getVehicleInventory() { return vehicleInventory; }
     public void setVehicleInventory(List<Vehicle> vehicleInventory) { this.vehicleInventory = vehicleInventory; }

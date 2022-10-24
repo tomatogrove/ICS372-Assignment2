@@ -2,6 +2,7 @@
   "dealers" : [ {
     "dealerID" : "1",
     "vehicleAcquisition" : true,
+    "name" : "Wacky Dealer One",
     "vehicleInventory" : [ {
       "vehicleID" : "1",
       "dealershipID" : "1",
@@ -10,7 +11,7 @@
       "vehicleManufacturer" : "Land Rover",
       "unit" : "pounds",
       "price" : 17000.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
       "vehicleID" : "2",
@@ -20,7 +21,7 @@
       "vehicleManufacturer" : "Toyota",
       "unit" : "dollars",
       "price" : 22600.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
       "vehicleID" : "3",
@@ -30,7 +31,7 @@
       "vehicleManufacturer" : "Genesis",
       "unit" : "dollars",
       "price" : 36600.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
       "vehicleID" : "4",
@@ -40,54 +41,55 @@
       "vehicleManufacturer" : "Mazda",
       "unit" : "dollars",
       "price" : 22330.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     } ],
-    "name" : "Wacky Dealer One"
+    "renting" : false
   }, {
-    "dealerID" : "1",
+    "dealerID" : "2",
     "vehicleAcquisition" : true,
+    "name" : "Quirky Dealer Two",
     "vehicleInventory" : [ {
-      "vehicleID" : "1",
-      "dealershipID" : "1",
+      "vehicleID" : "a",
+      "dealershipID" : "2",
       "vehicleType" : "suv",
       "vehicleModel" : "Range Rover",
       "vehicleManufacturer" : "Land Rover",
       "unit" : "pounds",
       "price" : 17000.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
-      "vehicleID" : "2",
-      "dealershipID" : "1",
+      "vehicleID" : "b",
+      "dealershipID" : "2",
       "vehicleType" : "pickup",
       "vehicleModel" : "Tundra",
       "vehicleManufacturer" : "Toyota",
       "unit" : "dollars",
       "price" : 22600.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
-      "vehicleID" : "3",
-      "dealershipID" : "1",
+      "vehicleID" : "c",
+      "dealershipID" : "2",
       "vehicleType" : "sedan",
       "vehicleModel" : "G70",
       "vehicleManufacturer" : "Genesis",
       "unit" : "dollars",
       "price" : 36600.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     }, {
-      "vehicleID" : "4",
-      "dealershipID" : "1",
+      "vehicleID" : "d",
+      "dealershipID" : "2",
       "vehicleType" : "sports car",
       "vehicleModel" : "Miata",
       "vehicleManufacturer" : "Mazda",
       "unit" : "dollars",
       "price" : 22330.0,
-      "acquisitionDate" : 1666564522606,
+      "acquisitionDate" : 1666577811263,
       "rented" : false
     } ],
-    "name" : "Wacky Dealer One"
+    "renting" : false
   } ]
 }
