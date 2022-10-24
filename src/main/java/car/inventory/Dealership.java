@@ -90,4 +90,8 @@ public class Dealership {
     public void clearInventory() {
         vehicleInventory.clear();
     }
+
+    public boolean isVehicleRented(Vehicle vehicle) {
+        return getVehicleById(vehicle.getVehicleID()) != null && getVehicleById(vehicle.getVehicleID()).isRented();
+    }
 }

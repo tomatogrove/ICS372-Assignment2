@@ -1,14 +1,17 @@
+package car.ui;
+
+import car.functionality.VehicleJSONParser;
+import car.inventory.DealerGroup;
+import car.inventory.Dealership;
+import car.inventory.Vehicle;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
 
-public class Test {
-	
-	
-	
+public class DealershipUI {
+
 	//Dealership object to test with called placeholder to bypass null pointer exception
 	private static final Dealership placeholder = new Dealership("test");
 	private static Dealership searchedDealer = placeholder;
@@ -40,24 +43,24 @@ public class Test {
 		JButton changeName = new JButton("save");
 		changeName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				searchedDealer.setDealerName(enterName.getText());
+				searchedDealer.setName(enterName.getText());
 			}
 		});
 		//adjust rent boolean value of dealer
 		JButton disableRent = new JButton("disable");
 		disableRent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				searchedDealer.disableRenting();
+				searchedDealer.setRenting(false);
 				//printing to console for testing
-				System.out.println(searchedDealer.getDealerID() + "'s renting is now " + searchedDealer.getRentOrNot());
+				System.out.println(searchedDealer.getDealerID() + "'s renting is now " + searchedDealer.isRenting());
 			}
 		});
 		JButton enableRent = new JButton("enable");
 		enableRent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				searchedDealer.enableRenting();
+				searchedDealer.setRenting(true);
 				//printing to console for testing
-				System.out.println(searchedDealer.getDealerID() + "'s renting is now " + searchedDealer.getRentOrNot());
+				System.out.println(searchedDealer.getDealerID() + "'s renting is now " + searchedDealer.isRenting());
 			}
 		});
 		//adjust vehicle acquisition boolean value of dealer
@@ -66,7 +69,7 @@ public class Test {
 			public void actionPerformed(ActionEvent e) {
 				searchedDealer.disableDealerVehicleAcquisition();
 				//printing to console for testing
-				System.out.println(searchedDealer.getDealerID() + "'s acquisition is now " + searchedDealer.getVehicleAcquisition());
+				System.out.println(searchedDealer.getDealerID() + "'s acquisition is now " + searchedDealer.isVehicleAcquisition());
 			}
 		});
 		JButton enableAcquisition = new JButton("enable");
@@ -74,15 +77,15 @@ public class Test {
 			public void actionPerformed(ActionEvent e) {
 				searchedDealer.enableDealerVehicleAcquisition();
 				//printing to console for testing
-				System.out.println(searchedDealer.getDealerID() + "'s acquisition is now " + searchedDealer.getVehicleAcquisition());
+				System.out.println(searchedDealer.getDealerID() + "'s acquisition is now " + searchedDealer.isVehicleAcquisition());
 			}
 		});
 		//checks inventory for rented cars first before transferring entire inventory
 		JButton transferAllVehicles = new JButton("transfer");
 		transferAllVehicles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(Map.Entry<String, Vehicle> vehicle : searchedDealer.getVehicleInventory().entrySet()) {
-					if(searchedDealer.checkIfCarIsRented(vehicle.getValue())) {
+				for(Vehicle vehicle : searchedDealer.getVehicleInventory()) {
+					if(searchedDealer.isVehicleRented(vehicle)) {
 						//transfer did not occur because a vehicle in the dealer's inventory is rented
 						return;
 					}
@@ -185,7 +188,7 @@ public class Test {
 	    		dealerSearch.setVisible(false);
 	    		mainPanel.add(dealerDetails);
 	    		ID.setText(searchedDealer.getDealerID());
-	    		enterName.setText(searchedDealer.getDealerName());
+	    		enterName.setText(searchedDealer.getName());
 	    		dealerDetails.setVisible(true);
 	    		filler2.setVisible(false);
 	    		}

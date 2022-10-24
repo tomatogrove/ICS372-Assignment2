@@ -1,3 +1,5 @@
+package car.ui;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,7 +8,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import car.functionality.VehicleJSONParser;
+import car.functionality.VehicleXMLParser;
+import car.inventory.Dealership;
 import car.inventory.Vehicle;
+import car.storage.StateManager;
 
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -25,6 +30,7 @@ public class VehicleImportFile extends JPanel {
 	private JPanel contentPane;
 	File filepath;
 	static VehicleImportFile frame;
+	List<Dealership> dealers;
 	List<Vehicle> vehicles;
 
 	/**
@@ -82,9 +88,10 @@ public class VehicleImportFile extends JPanel {
 				if (response == JFileChooser.APPROVE_OPTION) {
 					filepath = new File(file.getSelectedFile().getAbsolutePath());
 					xmlFilePath.setText(String.valueOf(filepath));
-					String pathFile = String.valueOf(filepath);
-					vehicles = VehicleXMLParser.read(pathFile);
-					StateManager.dealerGroup.addIncomingVehicles(vehicles);
+					dealers = VehicleXMLParser.read(filepath);
+					for (Dealership dealer : dealers) {
+						StateManager.dealerGroup.addIncomingVehicles(dealer.getVehicleInventory());
+					}
 				}
 			}
 		});
@@ -107,8 +114,7 @@ public class VehicleImportFile extends JPanel {
 				if (response == JFileChooser.APPROVE_OPTION) {
 					filepath = new File(file.getSelectedFile().getAbsolutePath());
 					jsonPathLabel.setText(String.valueOf(filepath));
-					String pathFile = String.valueOf(filepath);
-					vehicles = VehicleJSONParser.read(pathFile);
+					vehicles = VehicleJSONParser.read(filepath);
 					StateManager.dealerGroup.addIncomingVehicles(vehicles);
 				}
 			}
