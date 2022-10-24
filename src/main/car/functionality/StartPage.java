@@ -33,7 +33,7 @@ public class StartPage {
 		vehicleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VehicleImportFile vfi = new VehicleImportFile();
-				vfi.setVisible(true);
+				vfi.frameNew.setVisible(true);
 				frame.setVisible(false);
 			}
 		});
@@ -45,8 +45,10 @@ public class StartPage {
 		// what to do when button is pressed
 		dealerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Test dealerFrame = new Test();
-				
+				Test dealerFrame = new Test();Test dealerFrame = new Test();
+				//Unsure of how to reach the next frame
+				dealerFrame.mainPanel.SetVisible(true);
+				frame.setVisible(false);
 				
 			}
 		});
