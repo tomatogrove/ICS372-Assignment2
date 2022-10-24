@@ -22,6 +22,7 @@ public class VehicleXMLParser {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return dealers;
         }
 
         return dealers;
