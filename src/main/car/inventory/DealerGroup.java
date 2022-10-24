@@ -46,7 +46,7 @@ public class DealerGroup {
 		}
 	}
 
-	public void transferInvetory(String d1, String d2) {
+	public void transferInventory(String d1, String d2) {
 		Dealership dealer1 = getDealerByID(d1);
 		Dealership dealer2 = getDealerByID(d2);
 		dealer2.getVehicleInventory().putAll(dealer1.getVehicleInventory());
