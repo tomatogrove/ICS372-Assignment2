@@ -12,14 +12,15 @@ public class WelcomePanel extends JPanel implements ActionListener{
 		JButton vehicleButton = new JButton("All Vehicles");
 		vehicleButton.addActionListener(this);
 		vehicleButton.setBounds(80, 300, 100, 50);
-		
+
 		JButton dealerButton = new JButton("Dealers");
 		dealerButton.addActionListener(this);
 		dealerButton.setBounds(320, 300, 100, 50);
-		
+
 		JLabel title = new JLabel("Vehicle Inventory Program");
-		
-		
+		title.setFont(new Font("Areil", Font.BOLD, 24));
+		title.setBounds(100,100, 500, 100);
+
 	}
 
 	@Override
