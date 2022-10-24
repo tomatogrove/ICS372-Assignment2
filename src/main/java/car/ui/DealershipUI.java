@@ -18,7 +18,7 @@ public class DealershipUI {
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
 	   
-		JFrame mainPanel = new JFrame();
+		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new FlowLayout());
 		mainPanel.setSize(500,700);
 		
