@@ -2,28 +2,19 @@ package car.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class DealerGroup {
 
-	private ArrayList<Dealership> dealers;
-
+	private List<Dealership> dealers;
+	
 	public DealerGroup() {
 		this.dealers = new ArrayList<>();
 	}
 
-	public ArrayList<Dealership> getDealergroup() {
+	public List<Dealership> getDealers() {
 		return dealers;
 	}
-
-	public String getDealers() {
-		String dealerInfo = "";
-		for(Dealership dealer : dealers) {
-			dealerInfo += dealer.toString();
-		}
-		return dealerInfo;
-	}
-
+	
 	public Dealership getDealerByID(String dealerID) {
 		Dealership getDealer = null;
 		for(int i = 0; i < dealers.size(); i++) {
@@ -33,10 +24,10 @@ public class DealerGroup {
 		}
 		return getDealer;
 	}
-
+	
 	public String displayDealerVehicles() {
 		for(Dealership dealer : dealers) {
-			for(Vehicle vehicle : dealer.getVehicleInventory().values()) {
+			for(Vehicle vehicle : dealer.getVehicleInventory()) {
 				System.out.println(vehicle);
 			}
 		}
@@ -50,16 +41,17 @@ public class DealerGroup {
 				dealer = new Dealership(vehicle.getDealershipID());
 				dealers.add(dealer);
 			}
-			dealer.addIncomingVehicle(vehicle.getVehicleID(), vehicle);
+			dealer.addIncomingVehicle(vehicle);
 		}
 	}
 
-	public void transferInvetory(String d1, String d2) {
+	public void transferInventory(String d1, String d2) {
 		Dealership dealer1 = getDealerByID(d1);
 		Dealership dealer2 = getDealerByID(d2);
-		dealer2.getVehicleInventory().putAll(dealer1.getVehicleInventory());
+		for (Vehicle vehicle : dealer1.getVehicleInventory()) {
+			dealer2.addIncomingVehicle(vehicle);
+		}
 		dealer1.clearInventory();
 	}
-
 
 }

@@ -1,43 +1,36 @@
 package car.inventory;
 
-import java.util.Comparator;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Vehicle {
-	@JsonProperty("vehicle_id")
+
 	private String vehicleID;
-	@JsonProperty("dealership_id")
 	private String dealershipID;
-	@JsonProperty("vehicle_type")
 	private String vehicleType;
-	@JsonProperty("vehicle_model")
 	private String vehicleModel;
-	@JsonProperty("vehicle_manufacturer")
 	private String vehicleManufacturer;
-	@JsonProperty("acquisition_date")
-	private Date acquisitionDate;
-
-	/*
-	 * the price value may need to be changed to Java's Currency. Or it could be an
-	 * Enum or two values.
-	 */
-	private Double price;
 	private String unit;
+	private Double price;
+	private Date acquisitionDate;
+	private boolean rented;
 
+	public Vehicle() {}
 
-	/*
-	 * class will also need a "rented" boolean that needs a setter/getter
-	 */
-	private boolean rentStatus = false;
-
-	// make Jackson happy
-	public Vehicle() {
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
+		   Double price, String unit, Date acquisitionDate) {
+		this.vehicleID = vehicleID;
+		this.dealershipID = dealershipID;
+		this.vehicleType = vehicleType;
+		this.vehicleModel = vehicleModel;
+		this.vehicleManufacturer = vehicleManufacturer;
+		this.price = price;
+		this.unit = unit;
+		this.acquisitionDate = acquisitionDate;
+		rented = false;
 	}
 
-	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel,
-				   String vehicleManufacturer, Double price, Date acquisitionDate) {
+	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
+			Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -45,12 +38,12 @@ public class Vehicle {
 		this.vehicleManufacturer = vehicleManufacturer;
 		this.price = price;
 		this.acquisitionDate = acquisitionDate;
+		rented = false;
 	}
 
 	public String getVehicleID() {
 		return vehicleID;
 	}
-
 	public void setVehicleID(String vehicleID) {
 		this.vehicleID = vehicleID;
 	}
@@ -58,7 +51,6 @@ public class Vehicle {
 	public String getDealershipID() {
 		return dealershipID;
 	}
-
 	public void setDealershipID(String dealershipID) {
 		this.dealershipID = dealershipID;
 	}
@@ -66,7 +58,6 @@ public class Vehicle {
 	public String getVehicleType() {
 		return vehicleType;
 	}
-
 	public void setVehicleType(String vehicleType) {
 		this.vehicleType = vehicleType;
 	}
@@ -74,7 +65,6 @@ public class Vehicle {
 	public String getVehicleModel() {
 		return vehicleModel;
 	}
-
 	public void setVehicleModel(String vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
@@ -82,51 +72,29 @@ public class Vehicle {
 	public String getVehicleManufacturer() {
 		return vehicleManufacturer;
 	}
-
 	public void setVehicleManufacturer(String vehicleManufacturer) {
 		this.vehicleManufacturer = vehicleManufacturer;
 	}
 
+	public String getUnit() { return unit; }
+	public void setUnit(String unit) { this.unit = unit; }
+
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-	public String getUnit() {
-		return unit;
 	}
 
 	public Date getAcquisitionDate() {
 		return acquisitionDate;
 	}
-
 	public void setAcquisitionDate(Date acquisitionDate) {
 		this.acquisitionDate = acquisitionDate;
 	}
 
-	public boolean getRentStatus() {
-		return rentStatus;
-	}
-
-	public void setRentStatus(boolean status) {
-		rentStatus = status;
-	}
-
-	public void setToRented() {
-		this.rentStatus = true;
-	}
-
-	public void setToNotRented() {
-		this.rentStatus = false;
-	}
-
+	public boolean isRented() { return rented; }
+	public void setRented(boolean rented) { this.rented = rented; }
 
 	@Override
 	public String toString() {
@@ -138,9 +106,18 @@ public class Vehicle {
 		String secondLine = "-----------------------------------------------------------------------------------------\n";
 
 		String info = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", vehicleID, dealershipID, vehicleType,
-				vehicleModel, vehicleManufacturer, price, acquisitionDate, rentStatus);
+				vehicleModel, vehicleManufacturer, price, acquisitionDate, rented);
 
 		return summary + heading + secondLine + info;
 	}
 
+
+	// vehicle is equal if the vehicleID and dealerShipID are the same
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Vehicle vehicle = (Vehicle) o;
+		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
+	}
 }
