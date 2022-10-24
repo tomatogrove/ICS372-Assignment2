@@ -17,6 +17,10 @@ public class DealershipUI extends JPanel{
 	private static Dealership searchedDealer = placeholder;
 	//DOUBLE CHECK THE LAYOUT OF THE PANELS. May need adjustment
 	private static void makeDealerGUI(DealerGroup dealers) {
+	   
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new FlowLayout());
+		mainPanel.setSize(500,700);
 		
 		//navigation panel
 		JPanel navigation = new JPanel();
@@ -180,7 +184,9 @@ public class DealershipUI extends JPanel{
 	    		} else {
 	    		searchedDealer = dealers.getDealerByID(searchTerm.getText());
 	    		//transition point between searching for dealer screen and dealer info screen. Both converted into Jpanel
-	    		NavigationManager.changePanel(dealerDetails);
+	    		mainPanel.remove(dealerSearch);
+	    		dealerSearch.setVisible(false);
+	    		mainPanel.add(dealerDetails);
 	    		ID.setText(searchedDealer.getDealerID());
 	    		enterName.setText(searchedDealer.getName());
 	    		dealerDetails.setVisible(true);
@@ -196,7 +202,8 @@ public class DealershipUI extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(dealerDetails.isVisible()) {
 				dealerDetails.setVisible(false);
-				NavigationManager.changePanel(dealerSearch);
+				mainPanel.remove(dealerDetails);
+				mainPanel.add(dealerSearch);
 				dealerSearch.setVisible(true);
 				} else if(dealerSearch.isVisible()){
 					//show panel preceding dealer search screen. The welcome panel that is commented out pending Iab's decision on naming the welcome panel
@@ -214,7 +221,8 @@ public class DealershipUI extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(!dealerDetails.isVisible()) {
 				dealerSearch.setVisible(false);
-	    		NavigationManager.changePanel(dealerDetails);
+	    		mainPanel.remove(dealerSearch);
+	    		mainPanel.add(dealerDetails);
 	    		dealerDetails.setVisible(true);
 				} else {
 					if(searchedDealer.equals(placeholder) || searchedDealer.equals(null)) {
@@ -237,9 +245,9 @@ public class DealershipUI extends JPanel{
 		navigation.add(back);
 		navigation.add(forward);
 
-//	    mainPanel.add(navigation);
-//	    mainPanel.add(dealerSearch);
-//	    mainPanel.setVisible(true);
+	    mainPanel.add(navigation);
+	    mainPanel.add(dealerSearch);
+	    mainPanel.setVisible(true);
 	    
 	}
 }
