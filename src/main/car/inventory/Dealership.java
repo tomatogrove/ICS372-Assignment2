@@ -101,7 +101,7 @@ public class Dealership {
         this.dealerName = newName;
     }
 
-    public boolean getRentOrNot() {
+    public boolean getRentStatus() {
         return rentStatus;
     }
 
