@@ -22,6 +22,7 @@ public class VehicleJSONParser {
 			vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getVehicles();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return vehicleList;
 		}
 		return vehicleList;
 	}
@@ -37,6 +38,8 @@ public class VehicleJSONParser {
 		}
 	}
 
+
+	// only for use with StateManager's load()
 	public static DealerGroup readAll(File file) {
 		DealerGroup dealerGroup = new DealerGroup();
 		try {
@@ -47,6 +50,7 @@ public class VehicleJSONParser {
 		return dealerGroup;
 	}
 
+	// only for use with StateManager's save()
 	public static void writeAll(File file, DealerGroup dealerGroup) {
 		try {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealerGroup);

@@ -32,7 +32,7 @@ public class VehicleXMLWrapper {
 
             dealer.setDealerID(importedDealership.getId());
             dealer.setName(importedDealership.getName());
-            dealer.setVehicleInventory(importedDealership.getValidVehicles());
+            dealer.setVehicleInventory(importedDealership.getValidVehicles(importedDealership.getId()));
 
             dealers.add(dealer);
         }
@@ -62,7 +62,7 @@ public class VehicleXMLWrapper {
         public List<ImportedVehicle> getVehicles() { return vehicles; }
         public void setVehicles(List<ImportedVehicle> vehicles) { this.vehicles = vehicles; }
 
-        public List<Vehicle> getValidVehicles() {
+        public List<Vehicle> getValidVehicles(String id) {
             List<Vehicle> vehicles = new ArrayList<>();
             Date now = new Date(System.currentTimeMillis());
 
@@ -75,10 +75,13 @@ public class VehicleXMLWrapper {
                 vehicle.setPrice(Double.valueOf(importedVehicle.getImportedPrice().getPrice()));
                 vehicle.setVehicleManufacturer(importedVehicle.getMake());
                 vehicle.setVehicleModel(importedVehicle.getModel());
+                vehicle.setDealershipID(id);
 
                 // default values
                 vehicle.setRented(false);
                 vehicle.setAcquisitionDate(now);
+
+                vehicles.add(vehicle);
             }
 
             return vehicles;

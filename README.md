@@ -1,5 +1,8 @@
 # ICS372-Assignment2
 
+## Starting the Program
+The main function of the program is located in the StateManager class
+
 ## Importing Information
 ### JSON Files will generate a default value for
 * Vehicle "unit" which is dollars
@@ -17,5 +20,7 @@ Exported JSON files may have a different format than entered. Additional fields 
 * Dealer renting status
 * Dealer vehicleAcquisitionStatus
 * Vehicle rented status
-* Vehicle currency type
+* Vehicle currency unit
+
+These exported files are located in the working directory.
 
