@@ -106,7 +106,7 @@ public class Vehicle {
 		String secondLine = "-----------------------------------------------------------------------------------------\n";
 
 		String info = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", vehicleID, dealershipID, vehicleType,
-				vehicleModel, vehicleManufacturer, price, acquisitionDate, rentStatus);
+				vehicleModel, vehicleManufacturer, price, acquisitionDate, rented);
 
 		return summary + heading + secondLine + info;
 	}
