@@ -1,7 +1,6 @@
 package car.ui;
 
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,8 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
 
 public class ViewAllVehicleGui extends JPanel {
-	JFrame frameNew;
-	private JPanel contentPane;
+
+	private JPanel contentPanel;
 	static ViewAllVehicleGui frame;
 
 	/**
@@ -27,15 +26,12 @@ public class ViewAllVehicleGui extends JPanel {
 	 * @param value
 	 */
 	public ViewAllVehicleGui(List<Vehicle> value) {
-		frameNew = new JFrame();
-		frameNew.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameNew.setBounds(100, 100, 558, 446);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		frameNew.setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPanel = new JPanel();
+		contentPanel.setBackground(new Color(255, 255, 255));
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		contentPanel.setLayout(null);
 
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
@@ -46,16 +42,16 @@ public class ViewAllVehicleGui extends JPanel {
 			}
 		});
 		backButton.setBounds(25, 10, 85, 21);
-		contentPane.add(backButton);
+		contentPanel.add(backButton);
 
 		JLabel informationLabel = new JLabel("Informations");
 		informationLabel.setBounds(214, 36, 130, 13);
-		contentPane.add(informationLabel);
+		contentPanel.add(informationLabel);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(41, 59, 453, 304);
-		contentPane.add(scrollPane);
+		contentPanel.add(scrollPane);
 
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
