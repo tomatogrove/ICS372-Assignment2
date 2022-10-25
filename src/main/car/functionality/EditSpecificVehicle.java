@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 public class EditSpecificVehicle implements ActionListener {
 
     Logger logger = Logger.getLogger(EditSpecificVehicle.class.getName());
-    JFrame frame;
     JPanel panelSouth;
     JPanel panel;
     JLabel label;
@@ -31,8 +30,6 @@ public class EditSpecificVehicle implements ActionListener {
     JTextArea vehicleRentalInfo = new JTextArea(2,20);
     JPanel vehicleRentalInfoPanel = new JPanel();
     JPanel centerPanel = new JPanel();
-
-
 
     EditSpecificVehicle(){
         //This vehicle import (lines 39 - 40) can be removed.
@@ -53,9 +50,6 @@ public class EditSpecificVehicle implements ActionListener {
         jComboBox.setModel(new DefaultComboBoxModel<String>(vehicleIds.toArray(new String[0])));
         jComboBox.addActionListener(new VehicleIDComboBoxListener(jComboBox.getSelectedItem().toString(),dealerGroup));
 
-        //This frame can be removed. Only used for local testing.
-        frame = new JFrame();
-
         //Bottom panel container for buttons
         panelSouth = new JPanel();
         LayoutManager panelSouthLM = new BorderLayout();
@@ -63,14 +57,11 @@ public class EditSpecificVehicle implements ActionListener {
         button.addActionListener(this);
         panelSouth.setLayout(panelSouthLM);
         backButton = new JButton("Back");
-
-        //TODO add action listener for back button
-//        button.addActionListener();
-
+        backButton.addActionListener(this);
         panelSouth.add(button,BorderLayout.EAST);
         panelSouth.add(backButton,BorderLayout.WEST);
-        label = new JLabel();
 
+        //The center panel contains the main display information
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JTextArea instructionMsg = new JTextArea(3,20);
         String text = "Select a vehicle ID from the drop-down list to edit the vehicle's rental information.";
@@ -80,12 +71,13 @@ public class EditSpecificVehicle implements ActionListener {
         instructionMsg.setFont(font);
         instructionMsg.setLineWrap(true);
         instructionMsg.setWrapStyleWord(true);
-
         centerPanel.add(instructionMsg);
         centerPanel.add(jComboBox);
         vehicleRentalInfo.setVisible(false);
         centerPanel.add(vehicleRentalInfo);
         centerPanel.setBorder(new EmptyBorder(100,0,100,0));
+
+        //The north panel contains a label that identifies the purpose of the panel
         JPanel northPanel = new JPanel();
         JLabel northLabel = new JLabel("Edit Vehicle Rental Information");
         northPanel.add(northLabel);
@@ -96,36 +88,28 @@ public class EditSpecificVehicle implements ActionListener {
         panel.add(centerPanel,BorderLayout.CENTER);
         panel.add(panelSouth,BorderLayout.SOUTH);
         panel.setVisible(true);
-        frame.add(panel);
-        frame.setSize(900,600);
-        frame.setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String selection = (String)jComboBox.getSelectedItem();
-        for(Dealership dealership : dealerGroup.getDealers()){
-            if(dealership.getVehicleInventory().get(selection) != null){
-
-                if(dealership.getVehicleInventory().get(selection).getIsRented()){
-                    System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                    dealership.getVehicleInventory().get(selection).setIsRented(false);
-                    logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
-
-                } else {
-                    dealership.getVehicleInventory().get(selection).setIsRented(true);
-                    System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                    logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
-
+        if(e.getActionCommand().equals("Back")){
+            MainFrame.changePanel(new StartingPanel());
+        } else {
+            String selection = (String)jComboBox.getSelectedItem();
+            for(Dealership dealership : dealerGroup.getDealers()){
+                if(dealership.getVehicleInventory().get(selection) != null){
+                    if(dealership.getVehicleInventory().get(selection).getIsRented()){
+                        System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
+                        dealership.getVehicleInventory().get(selection).setIsRented(false);
+                        logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
+                    } else {
+                        dealership.getVehicleInventory().get(selection).setIsRented(true);
+                        System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
+                        logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
+                    }
+                    JOptionPane.showMessageDialog(panel,"The rental status for this vehicle has been updated.");
                 }
-                JOptionPane.showMessageDialog(panel,"The rental status for this vehicle has been updated.");
             }
         }
-    }
-
-
-    public JPanel getCenterPanel(){
-        return centerPanel;
     }
 }
