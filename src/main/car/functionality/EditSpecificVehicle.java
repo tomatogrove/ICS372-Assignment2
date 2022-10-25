@@ -32,10 +32,6 @@ public class EditSpecificVehicle implements ActionListener {
     JPanel centerPanel = new JPanel();
 
     EditSpecificVehicle(){
-        //This vehicle import (lines 39 - 40) can be removed.
-        //These were added for local testing
-        List<Vehicle> vehicleList = VehicleJSONParser.read("C:/Users/eric_/Documents/ICS 372/Project1_input.json");
-        dealerGroup.addIncomingVehicles(vehicleList);
 
         //build list for JComboBox
         List<String> vehicleIds = new ArrayList<>();
