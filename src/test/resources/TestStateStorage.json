@@ -11,7 +11,7 @@
       "vehicleManufacturer" : "Land Rover",
       "unit" : "pounds",
       "price" : 17000.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "2",
@@ -21,7 +21,7 @@
       "vehicleManufacturer" : "Toyota",
       "unit" : "dollars",
       "price" : 22600.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "3",
@@ -31,7 +31,7 @@
       "vehicleManufacturer" : "Genesis",
       "unit" : "dollars",
       "price" : 36600.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "4",
@@ -41,7 +41,7 @@
       "vehicleManufacturer" : "Mazda",
       "unit" : "dollars",
       "price" : 22330.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     } ],
     "renting" : false
@@ -57,7 +57,7 @@
       "vehicleManufacturer" : "Land Rover",
       "unit" : "pounds",
       "price" : 17000.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "b",
@@ -67,7 +67,7 @@
       "vehicleManufacturer" : "Toyota",
       "unit" : "dollars",
       "price" : 22600.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "c",
@@ -77,7 +77,7 @@
       "vehicleManufacturer" : "Genesis",
       "unit" : "dollars",
       "price" : 36600.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     }, {
       "vehicleID" : "d",
@@ -87,7 +87,7 @@
       "vehicleManufacturer" : "Mazda",
       "unit" : "dollars",
       "price" : 22330.0,
-      "acquisitionDate" : 1666577811263,
+      "acquisitionDate" : 1666818590728,
       "rented" : false
     } ],
     "renting" : false

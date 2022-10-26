@@ -98,8 +98,8 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return String.format("  %-20s%-20s%-20s%-20s%-20s%-20s%-40s%-20s\n\n", vehicleID, dealershipID, vehicleType,
-				vehicleModel, vehicleManufacturer, price, acquisitionDate, rented);
+		return String.format("  %-20s%-20s%-20s%-20s%-20s%-20s%-20s%-40s%-20s\n\n", vehicleID, dealershipID, vehicleType,
+				vehicleModel, vehicleManufacturer, unit, price, acquisitionDate, rented);
 	}
 
 

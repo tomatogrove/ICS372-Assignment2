@@ -84,12 +84,12 @@ public class Dealership {
     public String toString() {
         StringBuilder inventory = new StringBuilder("  Dealer: " + getDealerID() + "\tName: " + getName() + "\n");
 
-        inventory.append(String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-40s\n", "  Vehicle ID", "Dealership ID",
-                "Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Price", "Acquisition Date", "Rent Status"));
+        inventory.append(String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-40s\n", "  Vehicle ID", "Dealership ID",
+                "Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Unit","Price", "Acquisition Date", "Rent Status"));
 
         for( Vehicle vehicle : this.vehicleInventory) {
-            inventory.append("----------------------------------------------------------------------------------------" +
-                    "-------------------------------------------------------------------------------------------------------\n");
+            inventory.append("------------------------------------------------------------------------------------------------" +
+                "------------------------------------------------------------------------------------------------------------\n");
             inventory.append(vehicle.toString());
         }
         inventory.append("\n\n");
