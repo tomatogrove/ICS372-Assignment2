@@ -12,10 +12,9 @@ import car.storage.StateManager;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-import java.awt.event.ActionEvent;
+
 
 public class VehicleImportFile extends JPanel {
 
@@ -48,24 +47,10 @@ public class VehicleImportFile extends JPanel {
 
 		JLabel addLabel = new JLabel("Add:");
 		addLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		addLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		addLabel.setBounds(254, 124, 54, 21);
+		addLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		addLabel.setBounds(275, 130, 60, 30);
 		add(addLabel);
 
-		JLabel xmlLabel = new JLabel("XML");
-		xmlLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		xmlLabel.setBounds(20, 175, 45, 13);
-		add(xmlLabel);
-
-		JLabel xmlFilePath = new JLabel("XML File Path");
-		xmlFilePath.setBackground(new Color(192, 192, 192));
-		xmlFilePath.setHorizontalAlignment(SwingConstants.CENTER);
-		xmlFilePath.setBounds(54, 175, 234, 13);
-		add(xmlFilePath);
-
-		JLabel jsonLabel = new JLabel("JSON:");
-		jsonLabel.setBounds(294, 175, 45, 13);
-		add(jsonLabel);
 
 		JButton xmlBtn = new JButton("Select XML File");
 		xmlBtn.addActionListener(e -> {
@@ -75,20 +60,19 @@ public class VehicleImportFile extends JPanel {
 			int response = file.showOpenDialog(null);
 			if (response == JFileChooser.APPROVE_OPTION) {
 				filepath = new File(file.getSelectedFile().getAbsolutePath());
-				xmlFilePath.setText(String.valueOf(filepath));
 				dealers = VehicleXMLParser.read(filepath);
-				StateManager.dealerGroup.addIncomingDealers(dealers);
-				JOptionPane.showMessageDialog(this,"Dealers added!");
+				List<String> disabledDealers= StateManager.dealerGroup.addIncomingDealers(dealers);
+				if (disabledDealers.size() > 0) {
+					String concatDealers = String.join(", ", disabledDealers);
+					JOptionPane.showMessageDialog(this,"Dealer Vehicle Acquisition disabled for the following Dealer(s): "
+							+ concatDealers + "\nPlease enable Acquisition to add vehicles.");
+				} else {
+					JOptionPane.showMessageDialog(this,"All Dealers and Vehicles added!");
+				}
 			}
 		});
-		xmlBtn.setBounds(86, 198, 111, 21);
+		xmlBtn.setBounds(90, 200, 150, 40);
 		add(xmlBtn);
-
-		JLabel jsonPathLabel = new JLabel("JSON File Path");
-		jsonPathLabel.setBackground(new Color(255, 255, 255));
-		jsonPathLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		jsonPathLabel.setBounds(339, 175, 259, 13);
-		add(jsonPathLabel);
 
 		JButton jsonButton = new JButton("Select JSON File");
 		jsonButton.addActionListener(e -> {
@@ -98,25 +82,25 @@ public class VehicleImportFile extends JPanel {
 			int response = file.showOpenDialog(null);
 			if (response == JFileChooser.APPROVE_OPTION) {
 				filepath = new File(file.getSelectedFile().getAbsolutePath());
-				jsonPathLabel.setText(String.valueOf(filepath));
 				vehicles = VehicleJSONParser.read(filepath);
-				StateManager.dealerGroup.addIncomingVehicles(vehicles);
-				JOptionPane.showMessageDialog(this,"Vehicles added!");
+				List<String> disabledDealers= StateManager.dealerGroup.addIncomingVehicles(vehicles);
+				if (disabledDealers.size() > 0) {
+					String concatDealers = String.join(", ", disabledDealers);
+					JOptionPane.showMessageDialog(this,"Dealer Vehicle Acquisition disabled for the following Dealer(s): "
+							+ concatDealers + "\nPlease enable Acquisition to add vehicles.");
+				} else {
+					JOptionPane.showMessageDialog(this,"All Vehicles added!");
+				}
+
 			}
 		});
 
-		jsonButton.setBounds(437, 198, 113, 21);
+		jsonButton.setBounds(360, 200, 150, 40);
 		add(jsonButton);
-
-		JLabel errorLabel = new JLabel("");
-		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		errorLabel.setForeground(new Color(255, 0, 0));
-		errorLabel.setBounds(178, 315, 274, 13);
-		add(errorLabel);
 
 		JButton parseButton = new JButton("View All Vehicles");
 		parseButton.addActionListener(e -> NavigationManager.changePanel(new ViewAllVehicleGui()));
-		parseButton.setBounds(203, 363, 216, 21);
+		parseButton.setBounds(203, 363, 216, 40);
 		add(parseButton);
 
 	}

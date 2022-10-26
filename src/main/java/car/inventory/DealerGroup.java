@@ -28,25 +28,33 @@ public class DealerGroup {
 	public String displayDealerVehicles() {
 		StringBuilder sb = new StringBuilder();
 		for(Dealership dealer : dealers) {
-			for(Vehicle vehicle : dealer.getVehicleInventory()) {
-				sb.append(vehicle.toString());
-			}
+			sb.append(dealer.toString());
 		}
 		return sb.toString();
 	}
 
-	public void addIncomingVehicles(List<Vehicle> vehicles) {
-		for (Vehicle vehicle : vehicles ) {
+	public List<String> addIncomingVehicles(List<Vehicle> vehicles) {
+		List<String> disabledDealers = new ArrayList<>();
+		for (Vehicle vehicle : vehicles) {
+
 			Dealership dealer = getDealerByID(vehicle.getDealershipID());
 			if (dealer == null) {
 				dealer = new Dealership(vehicle.getDealershipID());
 				dealers.add(dealer);
 			}
-			dealer.addIncomingVehicle(vehicle);
+
+			if (dealer.isVehicleAcquisition()) {
+				dealer.addIncomingVehicle(vehicle);
+			} else {
+				disabledDealers.add(dealer.getDealerID());
+			}
 		}
+
+		return disabledDealers;
 	}
 
-	public void addIncomingDealers(List<Dealership> dealers) {
+	public List<String> addIncomingDealers(List<Dealership> dealers) {
+		List<String> disabledDealers = new ArrayList<>();
 		for (Dealership dealer : dealers) {
 			Dealership oldDealer = getDealerByID(dealer.getDealerID());
 			if (oldDealer != null) {
@@ -55,8 +63,9 @@ public class DealerGroup {
 			} else {
 				this.dealers.add(dealer);
 			}
-			addIncomingVehicles(dealer.getVehicleInventory());
+			disabledDealers.addAll(addIncomingVehicles(dealer.getVehicleInventory()));
 		}
+		return disabledDealers;
 	}
 
 	public boolean transferInventory(String d1, String d2) {

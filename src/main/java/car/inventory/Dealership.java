@@ -80,12 +80,14 @@ public class Dealership {
         this.vehicleAcquisition = false;
     }
 
-    public String inventory() {
-        String inventory = "";
+    @Override
+    public String toString() {
+        StringBuilder inventory = new StringBuilder("  Dealer: " + getDealerID() + "\tName: " + getName() + "\n");
         for( Vehicle vehicle : this.vehicleInventory) {
-            inventory += vehicle.toString();
+            inventory.append(vehicle.toString());
         }
-        return inventory;
+        inventory.append("\n\n");
+        return inventory.toString();
     }
 
     public void clearInventory() {

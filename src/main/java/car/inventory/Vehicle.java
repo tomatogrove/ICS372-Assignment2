@@ -99,16 +99,16 @@ public class Vehicle {
 	@Override
 	public String toString() {
 
-		String summary = "Vehicle Information\n" + "---------------------------------------------------\n";
-		String heading = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", "Vehicle ID", "Dealership ID",
+		String heading = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n", "  Vehicle ID", "Dealership ID",
 				"Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Price", "Acquisition Date", "Rent Status");
 
-		String secondLine = "-----------------------------------------------------------------------------------------\n";
+		String secondLine = "----------------------------------------------------------------------------------------" +
+			"-------------------------------------------------------------------------------------------------------\n";
 
-		String info = String.format("%-16s%-11s%-5s%-12s%-12s%-12s%-12s\n", vehicleID, dealershipID, vehicleType,
+		String info = String.format("  %-20s%-20s%-20s%-20s%-20s%-20s%-40s%-20s\n", vehicleID, dealershipID, vehicleType,
 				vehicleModel, vehicleManufacturer, price, acquisitionDate, rented);
 
-		return summary + heading + secondLine + info;
+		return heading + secondLine + info + "\n";
 	}
 
 

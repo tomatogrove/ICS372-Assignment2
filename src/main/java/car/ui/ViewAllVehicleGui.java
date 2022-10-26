@@ -4,18 +4,13 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import car.inventory.Dealership;
-import car.inventory.Vehicle;
 import car.storage.StateManager;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-import javax.swing.ScrollPaneConstants;
 
 public class ViewAllVehicleGui extends JPanel {
 

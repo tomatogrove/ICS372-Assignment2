@@ -70,6 +70,8 @@ public class DealershipSearch extends JPanel implements ActionListener {
 
 		private JTextField enterName;
 		private JTextField transferInventory;
+		private JLabel renting;
+		private JLabel acquisition;
 
 		public SpecificDealerShip(Dealership dealer) {
 
@@ -88,13 +90,13 @@ public class DealershipSearch extends JPanel implements ActionListener {
 			JPanel nextScreen = new JPanel();
 			nextScreen.setLayout(new GridLayout(1,3,20,20));
 
-			JLabel id = new JLabel("Dealer: ID here");
-			JLabel name = new JLabel("Name: ");
-			JLabel renting = new JLabel("Renting: ");
-			JLabel acquisition = new JLabel("Vehicle Acquisition: ");
+			JLabel id = new JLabel("Dealer: " + dealer.getDealerID());
+			JLabel name = new JLabel("Name:");
+			renting = new JLabel("Renting: " + (dealer.isRenting() ? "Enabled" : "Disabled"));
+			acquisition = new JLabel("Vehicle Acquisition: " + (dealer.isVehicleAcquisition() ? "Enabled" : "Disabled"));
 			JLabel transfer = new JLabel("Transfer Inventory to: ");
 			JLabel export = new JLabel("Export: ");
-			enterName = new JTextField("Dealer Name here");
+			enterName = new JTextField(dealer.getName());
 			transferInventory = new JTextField("Receiving Dealer ID here");
 
 			JButton changeName = new JButton("save");
@@ -117,7 +119,6 @@ public class DealershipSearch extends JPanel implements ActionListener {
 			specificVehicleScreen.addActionListener(this);
 
 			navigation.add(back);
-
 			navigation.add(id);
 
 			dealerDetails.add(name);
@@ -158,19 +159,19 @@ public class DealershipSearch extends JPanel implements ActionListener {
 					break;
 				case "disable renting":
 					dealer.setRenting(false);
-					JOptionPane.showMessageDialog(this,"Renting disabled!");
+					renting.setText("Renting: Disabled");
 					break;
 				case "enable renting":
 					dealer.setRenting(true);
-					JOptionPane.showMessageDialog(this,"Renting enabled!");
+					renting.setText("Renting: Enabled");
 					break;
 				case "disable acquisition":
 					dealer.disableDealerVehicleAcquisition();
-					JOptionPane.showMessageDialog(this,"Acquisition disabled!");
+					acquisition.setText("Vehicle Acquisition: Disabled");
 					break;
 				case "enable acquisition":
 					dealer.enableDealerVehicleAcquisition();
-					JOptionPane.showMessageDialog(this,"Acquisition enabled!");
+					acquisition.setText("Vehicle Acquisition: Enabled");
 					break;
 				case "transfer":
 					boolean didSucceed = StateManager.dealerGroup.transferInventory(dealer.getDealerID(), transferInventory.getText());
