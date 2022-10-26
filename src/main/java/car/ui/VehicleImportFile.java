@@ -78,6 +78,7 @@ public class VehicleImportFile extends JPanel {
 				xmlFilePath.setText(String.valueOf(filepath));
 				dealers = VehicleXMLParser.read(filepath);
 				StateManager.dealerGroup.addIncomingDealers(dealers);
+				JOptionPane.showMessageDialog(this,"Dealers added!");
 			}
 		});
 		xmlBtn.setBounds(86, 198, 111, 21);
@@ -90,18 +91,17 @@ public class VehicleImportFile extends JPanel {
 		add(jsonPathLabel);
 
 		JButton jsonButton = new JButton("Select JSON File");
-		jsonButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser file = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("json files (*.json)", "json");
-				file.setFileFilter(filter);
-				int response = file.showOpenDialog(null);
-				if (response == JFileChooser.APPROVE_OPTION) {
-					filepath = new File(file.getSelectedFile().getAbsolutePath());
-					jsonPathLabel.setText(String.valueOf(filepath));
-					vehicles = VehicleJSONParser.read(filepath);
-					StateManager.dealerGroup.addIncomingVehicles(vehicles);
-				}
+		jsonButton.addActionListener(e -> {
+			JFileChooser file = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("json files (*.json)", "json");
+			file.setFileFilter(filter);
+			int response = file.showOpenDialog(null);
+			if (response == JFileChooser.APPROVE_OPTION) {
+				filepath = new File(file.getSelectedFile().getAbsolutePath());
+				jsonPathLabel.setText(String.valueOf(filepath));
+				vehicles = VehicleJSONParser.read(filepath);
+				StateManager.dealerGroup.addIncomingVehicles(vehicles);
+				JOptionPane.showMessageDialog(this,"Vehicles added!");
 			}
 		});
 

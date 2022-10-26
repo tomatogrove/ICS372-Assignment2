@@ -4,16 +4,6 @@
     "vehicleAcquisition" : true,
     "name" : "N/A",
     "vehicleInventory" : [ {
-      "vehicleID" : "48934j",
-      "dealershipID" : "12513",
-      "vehicleType" : "suv",
-      "vehicleModel" : "Explorer",
-      "vehicleManufacturer" : "Ford",
-      "unit" : "dollars",
-      "price" : 20123.0,
-      "acquisitionDate" : 1515354694451,
-      "rented" : false
-    }, {
       "vehicleID" : "83883",
       "dealershipID" : "12513",
       "vehicleType" : "sedan",
@@ -22,7 +12,7 @@
       "unit" : "dollars",
       "price" : 50444.0,
       "acquisitionDate" : 1515354694451,
-      "rented" : false
+      "rented" : true
     }, {
       "vehicleID" : "89343883",
       "dealershipID" : "12513",
@@ -33,8 +23,18 @@
       "price" : 70444.0,
       "acquisitionDate" : 1515354694451,
       "rented" : false
+    }, {
+      "vehicleID" : "48934j",
+      "dealershipID" : "12513",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Explorer",
+      "vehicleManufacturer" : "Ford",
+      "unit" : "dollars",
+      "price" : 20123.0,
+      "acquisitionDate" : 1515354694451,
+      "rented" : true
     } ],
-    "renting" : false
+    "renting" : true
   }, {
     "dealerID" : "77338",
     "vehicleAcquisition" : true,
@@ -48,6 +48,144 @@
       "unit" : "dollars",
       "price" : 49889.0,
       "acquisitionDate" : 1515354694451,
+      "rented" : false
+    } ],
+    "renting" : false
+  }, {
+    "dealerID" : "1",
+    "vehicleAcquisition" : true,
+    "name" : "Wacky Bob’s Automall",
+    "vehicleInventory" : [ {
+      "vehicleID" : "a",
+      "dealershipID" : "1",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Range Rover",
+      "vehicleManufacturer" : "Land Rover",
+      "unit" : "pounds",
+      "price" : 17000.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "b",
+      "dealershipID" : "1",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Tundra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 22600.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "c",
+      "dealershipID" : "1",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "G70",
+      "vehicleManufacturer" : "Genesis",
+      "unit" : "dollars",
+      "price" : 36600.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "d",
+      "dealershipID" : "1",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Miata",
+      "vehicleManufacturer" : "Mazda",
+      "unit" : "dollars",
+      "price" : 22330.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    } ],
+    "renting" : false
+  }, {
+    "dealerID" : "485",
+    "vehicleAcquisition" : true,
+    "name" : "Wacky Bob’s Automall",
+    "vehicleInventory" : [ {
+      "vehicleID" : "52523",
+      "dealershipID" : "485",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Tundra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 22600.0,
+      "acquisitionDate" : 1666759787802,
+      "rented" : false
+    }, {
+      "vehicleID" : "151e5dde",
+      "dealershipID" : "485",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "G70",
+      "vehicleManufacturer" : "Genesis",
+      "unit" : "dollars",
+      "price" : 36600.0,
+      "acquisitionDate" : 1666759787802,
+      "rented" : false
+    }, {
+      "vehicleID" : "ern222",
+      "dealershipID" : "485",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Miata",
+      "vehicleManufacturer" : "Mazda",
+      "unit" : "dollars",
+      "price" : 22330.0,
+      "acquisitionDate" : 1666759787802,
+      "rented" : false
+    }, {
+      "vehicleID" : "848432",
+      "dealershipID" : "485",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Range Rover",
+      "vehicleManufacturer" : "Land Rover",
+      "unit" : "pounds",
+      "price" : 17000.0,
+      "acquisitionDate" : 1666759787802,
+      "rented" : false
+    } ],
+    "renting" : false
+  }, {
+    "dealerID" : "2",
+    "vehicleAcquisition" : true,
+    "name" : "Wacky Bob’s Automall",
+    "vehicleInventory" : [ {
+      "vehicleID" : "2",
+      "dealershipID" : "2",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Tundra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 22600.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "3",
+      "dealershipID" : "2",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "G70",
+      "vehicleManufacturer" : "Genesis",
+      "unit" : "dollars",
+      "price" : 36600.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "4",
+      "dealershipID" : "2",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Miata",
+      "vehicleManufacturer" : "Mazda",
+      "unit" : "dollars",
+      "price" : 22330.0,
+      "acquisitionDate" : 1666759822047,
+      "rented" : false
+    }, {
+      "vehicleID" : "1",
+      "dealershipID" : "2",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Range Rover",
+      "vehicleManufacturer" : "Land Rover",
+      "unit" : "pounds",
+      "price" : 17000.0,
+      "acquisitionDate" : 1666759822047,
       "rented" : false
     } ],
     "renting" : false

@@ -25,14 +25,17 @@ public class EditSpecificVehicle extends JPanel implements ActionListener {
     JButton backButton;
     JTextArea textArea;
     DealerGroup dealerGroup = new DealerGroup();
-    Dealership dealer = new Dealership("12513");
     JComboBox<String> jComboBox = new JComboBox<String>();
     String vehicleRentalInfoText;
     JTextArea vehicleRentalInfo = new JTextArea(2,20);
     JPanel vehicleRentalInfoPanel = new JPanel();
     JPanel centerPanel = new JPanel();
 
+    private Dealership dealer;
+
     EditSpecificVehicle(Dealership dealer){
+
+        this.dealer = dealer;
 
         //build list for JComboBox
         List<String> vehicleIds = new ArrayList<>();
@@ -84,26 +87,32 @@ public class EditSpecificVehicle extends JPanel implements ActionListener {
         panel.add(centerPanel,BorderLayout.CENTER);
         panel.add(panelSouth,BorderLayout.SOUTH);
         panel.setVisible(true);
+
+        add(centerPanel);
+        add(panel);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Back")){
-            NavigationManager.changePanel(new DealershipSearch());
+            NavigationManager.changePanel(new DealershipSearch.SpecificDealerShip(dealer));
         } else {
             String selection = (String)jComboBox.getSelectedItem();
 
-            Vehicle vehicle = dealer.getVehicleById(selection);
-            if (vehicle != null) {
-                if (vehicle.isRented()) {
-                    vehicle.setRented(false);
-                    logger.info("The rental status has been changed to: false");
-                } else {
-                    vehicle.setRented(true);
-                    logger.info("The rental status has been changed to: true");
+            if (dealer.isRenting()) {
+
+                Vehicle vehicle = dealer.getVehicleById(selection);
+                if (vehicle != null) {
+                    if (vehicle.isRented()) {
+                        vehicle.setRented(false);
+                        JOptionPane.showMessageDialog(panel, "The rental status has been changed to: false");
+                    } else {
+                        vehicle.setRented(true);
+                        JOptionPane.showMessageDialog(panel, "The rental status has been changed to: true");
+                    }
                 }
-                StateManager.dealerGroup.addIncomingVehicles(List.of(vehicle));
-                JOptionPane.showMessageDialog(panel,"The rental status for this vehicle has been updated.");
+            } else {
+                    JOptionPane.showMessageDialog(panel, "This dealer is currently not allowing renting. Please enable renting before trying again.");
             }
         }
     }

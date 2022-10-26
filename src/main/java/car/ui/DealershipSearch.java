@@ -74,8 +74,6 @@ public class DealershipSearch extends JPanel implements ActionListener {
 
 			this.dealer = dealer;
 
-			setLayout(null);
-
 			JButton back = new JButton("Back");
 
 			JLabel id = new JLabel("Dealer: ID here");
@@ -143,21 +141,31 @@ public class DealershipSearch extends JPanel implements ActionListener {
 					break;
 				case "disable renting":
 					dealer.setRenting(false);
+					JOptionPane.showMessageDialog(this,"Renting disabled!");
 					break;
 				case "enable renting":
 					dealer.setRenting(true);
+					JOptionPane.showMessageDialog(this,"Renting enabled!");
 					break;
 				case "disable acquisition":
 					dealer.disableDealerVehicleAcquisition();
+					JOptionPane.showMessageDialog(this,"Acquisition disabled!");
 					break;
 				case "enable acquisition":
 					dealer.enableDealerVehicleAcquisition();
+					JOptionPane.showMessageDialog(this,"Acquisition enabled!");
 					break;
 				case "transfer":
 					boolean didSucceed = StateManager.dealerGroup.transferInventory(dealer.getDealerID(), transferInventory.getText());
+					if (didSucceed) {
+						JOptionPane.showMessageDialog(this,"Transfer successful!");
+					} else {
+						JOptionPane.showMessageDialog(this,"Transfer unsuccessful.");
+					}
 					break;
 				case "JSON":
 					VehicleJSONParser.write(dealer);
+					JOptionPane.showMessageDialog(this,"Dealer information exported!");
 					break;
 				case "Specific Vehicle":
 					NavigationManager.changePanel(new EditSpecificVehicle(dealer));
