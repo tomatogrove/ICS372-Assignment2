@@ -63,7 +63,7 @@ public class DealershipSearch extends JPanel implements ActionListener {
 
 
 
-	public static class SpecificDealerShip extends JPanel implements ActionListener{
+	public static class SpecificDealerShip extends JPanel implements ActionListener {
 
 		private Dealership dealer;
 
@@ -73,6 +73,8 @@ public class DealershipSearch extends JPanel implements ActionListener {
 		public SpecificDealerShip(Dealership dealer) {
 
 			this.dealer = dealer;
+
+			setLayout(null);
 
 			JButton back = new JButton("Back");
 
