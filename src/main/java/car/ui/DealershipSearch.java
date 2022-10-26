@@ -4,6 +4,7 @@ import car.functionality.VehicleJSONParser;
 import car.inventory.Dealership;
 import car.storage.StateManager;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -74,7 +75,18 @@ public class DealershipSearch extends JPanel implements ActionListener {
 
 			this.dealer = dealer;
 
+			setLayout(new FlowLayout(FlowLayout.CENTER,200,20));
+
 			JButton back = new JButton("Back");
+
+			JPanel navigation = new JPanel();
+			navigation.setLayout(new GridLayout(2,1,20,20));
+			JPanel dealerDetails = new JPanel();
+			dealerDetails.setLayout(new GridLayout(4,3,20,20));
+			JPanel exportOptions = new JPanel();
+			exportOptions.setLayout(new GridLayout(1,3,20,20));
+			JPanel nextScreen = new JPanel();
+			nextScreen.setLayout(new GridLayout(1,3,20,20));
 
 			JLabel id = new JLabel("Dealer: ID here");
 			JLabel name = new JLabel("Name: ");
@@ -104,30 +116,35 @@ public class DealershipSearch extends JPanel implements ActionListener {
 			jsonExport.addActionListener(this);
 			specificVehicleScreen.addActionListener(this);
 
-			add(back);
+			navigation.add(back);
 
-			add(id);
+			navigation.add(id);
 
-			add(name);
-			add(enterName);
-			add(changeName);
+			dealerDetails.add(name);
+			dealerDetails.add(enterName);
+			dealerDetails.add(changeName);
 
-			add(renting);
-			add(enableRent);
-			add(disableRent);
+			dealerDetails.add(renting);
+			dealerDetails.add(enableRent);
+			dealerDetails.add(disableRent);
 
-			add(acquisition);
-			add(enableAcquisition);
-			add(disableAcquisition);
+			dealerDetails.add(acquisition);
+			dealerDetails.add(enableAcquisition);
+			dealerDetails.add(disableAcquisition);
 
-			add(transfer);
-			add(transferInventory);
-			add(transferAllVehicles);
+			dealerDetails.add(transfer);
+			dealerDetails.add(transferInventory);
+			dealerDetails.add(transferAllVehicles);
 
-			add(export);
-			add(jsonExport);
+			exportOptions.add(export);
+			exportOptions.add(jsonExport);
 
-			add(specificVehicleScreen);
+			nextScreen.add(specificVehicleScreen);
+
+			add(navigation);
+			add(dealerDetails);
+			add(exportOptions);
+			add(nextScreen);
 		}
 
 		@Override
