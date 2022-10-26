@@ -26,6 +26,7 @@ public class Dealership {
 
     public Dealership(String newDealer) {
         dealerID = newDealer;
+        name = "N/A";
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
         isRenting = false;
@@ -62,7 +63,7 @@ public class Dealership {
         }
     }
 
-    private Vehicle getVehicleById(String vehicleID) {
+    public Vehicle getVehicleById(String vehicleID) {
         for (Vehicle vehicle : vehicleInventory) {
             if (vehicle.getVehicleID().equals(vehicleID)) {
                 return vehicle;
@@ -93,5 +94,11 @@ public class Dealership {
 
     public boolean isVehicleRented(Vehicle vehicle) {
         return getVehicleById(vehicle.getVehicleID()) != null && getVehicleById(vehicle.getVehicleID()).isRented();
+    }
+
+    public void setAllVehicleDealerIds(String d2) {
+        for (Vehicle vehicle : vehicleInventory) {
+            vehicle.setDealershipID(d2);
+        }
     }
 }

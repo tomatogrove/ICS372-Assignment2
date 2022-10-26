@@ -21,7 +21,7 @@ public class NavigationManager extends JFrame {
         StateManager.load();
 
         frame = new JFrame("The Container");
-        frame.setSize(500, 500);
+        frame.setSize(650, 500);
 
         // code found https://www.codejava.net/java-se/swing/preventing-jframe-window-from-closing
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -32,7 +32,6 @@ public class NavigationManager extends JFrame {
             }
         });
 
-        //placeholder for Pao's panel. Will change when Pao decides on a name
         currentPanel = new WelcomePanel();
         frame.add(currentPanel);
 

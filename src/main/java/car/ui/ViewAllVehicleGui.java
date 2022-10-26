@@ -4,7 +4,9 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import car.inventory.Dealership;
 import car.inventory.Vehicle;
+import car.storage.StateManager;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,52 +19,31 @@ import javax.swing.ScrollPaneConstants;
 
 public class ViewAllVehicleGui extends JPanel {
 
-	private JPanel contentPanel;
-	static ViewAllVehicleGui frame;
+	public ViewAllVehicleGui() {
 
-	/**
-	 * Create the frame.
-	 * 
-	 * @param value
-	 */
-	public ViewAllVehicleGui(List<Vehicle> value) {
+		setBackground(new Color(255, 255, 255));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		contentPanel = new JPanel();
-		contentPanel.setBackground(new Color(255, 255, 255));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		contentPanel.setLayout(null);
+		setLayout(null);
 
 		JButton backButton = new JButton("Back");
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VehicleImportFile frameImport = new VehicleImportFile();
-				frameImport.setVisible(true);
-				frame.setVisible(false);
-			}
-		});
+		backButton.addActionListener(e -> NavigationManager.changePanel(new VehicleImportFile()));
 		backButton.setBounds(25, 10, 85, 21);
-		contentPanel.add(backButton);
+		add(backButton);
 
-		JLabel informationLabel = new JLabel("Informations");
-		informationLabel.setBounds(214, 36, 130, 13);
-		contentPanel.add(informationLabel);
+		JLabel informationLabel = new JLabel("Information");
+		informationLabel.setBounds(275, 30, 150, 25);
+		add(informationLabel);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(41, 59, 453, 304);
-		contentPanel.add(scrollPane);
+		scrollPane.setBounds(50, 50, 525, 350);
+		add(scrollPane);
 
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
 
-		String detail = "";
-		for (Vehicle vehicle : value) {
-			detail += vehicle.toString();
-		}
-
-		textArea.setText(detail);
+		textArea.setText(StateManager.dealerGroup.displayDealerVehicles());
 
 	}
 }

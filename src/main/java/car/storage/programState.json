@@ -1,0 +1,55 @@
+{
+  "dealers" : [ {
+    "dealerID" : "12513",
+    "vehicleAcquisition" : true,
+    "name" : "N/A",
+    "vehicleInventory" : [ {
+      "vehicleID" : "48934j",
+      "dealershipID" : "12513",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Explorer",
+      "vehicleManufacturer" : "Ford",
+      "unit" : "dollars",
+      "price" : 20123.0,
+      "acquisitionDate" : 1515354694451,
+      "rented" : false
+    }, {
+      "vehicleID" : "83883",
+      "dealershipID" : "12513",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "Model 3",
+      "vehicleManufacturer" : "Tesla",
+      "unit" : "dollars",
+      "price" : 50444.0,
+      "acquisitionDate" : 1515354694451,
+      "rented" : false
+    }, {
+      "vehicleID" : "89343883",
+      "dealershipID" : "12513",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Silverado",
+      "vehicleManufacturer" : "Chevy",
+      "unit" : "dollars",
+      "price" : 70444.0,
+      "acquisitionDate" : 1515354694451,
+      "rented" : false
+    } ],
+    "renting" : false
+  }, {
+    "dealerID" : "77338",
+    "vehicleAcquisition" : true,
+    "name" : "N/A",
+    "vehicleInventory" : [ {
+      "vehicleID" : "229393",
+      "dealershipID" : "77338",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Supra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 49889.0,
+      "acquisitionDate" : 1515354694451,
+      "rented" : false
+    } ],
+    "renting" : false
+  } ]
+}

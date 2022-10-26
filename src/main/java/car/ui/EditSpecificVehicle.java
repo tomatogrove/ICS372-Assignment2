@@ -1,8 +1,9 @@
-package car.functionality;
+package car.ui;
 
 import car.inventory.DealerGroup;
 import car.inventory.Dealership;
 import car.inventory.Vehicle;
+import car.storage.StateManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EditSpecificVehicle implements ActionListener {
+public class EditSpecificVehicle extends JPanel implements ActionListener {
 
     Logger logger = Logger.getLogger(EditSpecificVehicle.class.getName());
     JPanel panelSouth;
@@ -31,20 +32,19 @@ public class EditSpecificVehicle implements ActionListener {
     JPanel vehicleRentalInfoPanel = new JPanel();
     JPanel centerPanel = new JPanel();
 
-    EditSpecificVehicle(){
+    EditSpecificVehicle(Dealership dealer){
 
         //build list for JComboBox
         List<String> vehicleIds = new ArrayList<>();
-        for(Dealership dealer : dealerGroup.getDealers()){
-            logger.log(Level.INFO,"Building vehicle ID list for dealership " + dealer.getDealerID());
-            for(String key : dealer.getVehicleInventory().keySet()){
-                vehicleIds.add(key);
-            }
-            logger.log(Level.INFO,"Finished building vehicle ID list");
+
+        logger.log(Level.INFO,"Building vehicle ID list for dealership " + dealer.getDealerID());
+        for (Vehicle vehicle : dealer.getVehicleInventory()) {
+            vehicleIds.add(vehicle.getVehicleID());
         }
+        logger.log(Level.INFO,"Finished building vehicle ID list");
 
         jComboBox.setModel(new DefaultComboBoxModel<String>(vehicleIds.toArray(new String[0])));
-        jComboBox.addActionListener(new VehicleIDComboBoxListener(jComboBox.getSelectedItem().toString(),dealerGroup));
+        jComboBox.addActionListener(new VehicleIDComboBoxListener(jComboBox.getSelectedItem().toString(), dealer));
 
         //Bottom panel container for buttons
         panelSouth = new JPanel();
@@ -89,22 +89,21 @@ public class EditSpecificVehicle implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Back")){
-            MainFrame.changePanel(new StartingPanel());
+            NavigationManager.changePanel(new DealershipSearch());
         } else {
             String selection = (String)jComboBox.getSelectedItem();
-            for(Dealership dealership : dealerGroup.getDealers()){
-                if(dealership.getVehicleInventory().get(selection) != null){
-                    if(dealership.getVehicleInventory().get(selection).getIsRented()){
-                        System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                        dealership.getVehicleInventory().get(selection).setIsRented(false);
-                        logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                    } else {
-                        dealership.getVehicleInventory().get(selection).setIsRented(true);
-                        System.out.println("rental status: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                        logger.info("The rental status has been changed to: " + dealership.getVehicleInventory().get(selection).getIsRented());
-                    }
-                    JOptionPane.showMessageDialog(panel,"The rental status for this vehicle has been updated.");
+
+            Vehicle vehicle = dealer.getVehicleById(selection);
+            if (vehicle != null) {
+                if (vehicle.isRented()) {
+                    vehicle.setRented(false);
+                    logger.info("The rental status has been changed to: false");
+                } else {
+                    vehicle.setRented(true);
+                    logger.info("The rental status has been changed to: true");
                 }
+                StateManager.dealerGroup.addIncomingVehicles(List.of(vehicle));
+                JOptionPane.showMessageDialog(panel,"The rental status for this vehicle has been updated.");
             }
         }
     }

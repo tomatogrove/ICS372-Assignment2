@@ -26,12 +26,13 @@ public class DealerGroup {
 	}
 	
 	public String displayDealerVehicles() {
+		StringBuilder sb = new StringBuilder();
 		for(Dealership dealer : dealers) {
 			for(Vehicle vehicle : dealer.getVehicleInventory()) {
-				System.out.println(vehicle);
+				sb.append(vehicle.toString());
 			}
 		}
-		return null;
+		return sb.toString();
 	}
 
 	public void addIncomingVehicles(List<Vehicle> vehicles) {
@@ -45,13 +46,31 @@ public class DealerGroup {
 		}
 	}
 
-	public void transferInventory(String d1, String d2) {
+	public void addIncomingDealers(List<Dealership> dealers) {
+		for (Dealership dealer : dealers) {
+			Dealership oldDealer = getDealerByID(dealer.getDealerID());
+			if (oldDealer != null) {
+				String newName = dealer.getName();
+				oldDealer.setName(newName);
+			} else {
+				this.dealers.add(dealer);
+			}
+			addIncomingVehicles(dealer.getVehicleInventory());
+		}
+	}
+
+	public boolean transferInventory(String d1, String d2) {
 		Dealership dealer1 = getDealerByID(d1);
 		Dealership dealer2 = getDealerByID(d2);
-		for (Vehicle vehicle : dealer1.getVehicleInventory()) {
-			dealer2.addIncomingVehicle(vehicle);
+		if (dealer2 != null) {
+			dealer1.setAllVehicleDealerIds(d2);
+			for (Vehicle vehicle : dealer1.getVehicleInventory()) {
+				dealer2.addIncomingVehicle(vehicle);
+			}
+			dealer1.clearInventory();
+			return true;
 		}
-		dealer1.clearInventory();
+		return false;
 	}
 
 }
