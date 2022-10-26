@@ -98,17 +98,8 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-
-		String heading = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n", "  Vehicle ID", "Dealership ID",
-				"Vehicle Type", "Vehicle Model", "Vehicle Manufacturer", "Price", "Acquisition Date", "Rent Status");
-
-		String secondLine = "----------------------------------------------------------------------------------------" +
-			"-------------------------------------------------------------------------------------------------------\n";
-
-		String info = String.format("  %-20s%-20s%-20s%-20s%-20s%-20s%-40s%-20s\n", vehicleID, dealershipID, vehicleType,
+		return String.format("  %-20s%-20s%-20s%-20s%-20s%-20s%-40s%-20s\n\n", vehicleID, dealershipID, vehicleType,
 				vehicleModel, vehicleManufacturer, price, acquisitionDate, rented);
-
-		return heading + secondLine + info + "\n";
 	}
 
 

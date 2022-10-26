@@ -99,7 +99,7 @@ public class DealershipSearch extends JPanel implements ActionListener {
 			enterName = new JTextField(dealer.getName());
 			transferInventory = new JTextField("Receiving Dealer ID here");
 
-			JButton changeName = new JButton("save");
+			JButton changeName = new JButton("save name");
 			JButton disableRent = new JButton("disable renting");
 			JButton enableRent = new JButton("enable renting");
 			JButton disableAcquisition = new JButton("disable acquisition");

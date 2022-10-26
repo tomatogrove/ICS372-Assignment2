@@ -73,7 +73,7 @@ public class DealerGroup {
 	public boolean transferInventory(String d1, String d2) {
 		Dealership dealer1 = getDealerByID(d1);
 		Dealership dealer2 = getDealerByID(d2);
-		if (dealer2 != null) {
+		if (dealer2 != null && !d1.equals(d2) && dealer2.isVehicleAcquisition()) {
 			dealer1.setAllVehicleDealerIds(d2);
 			for (Vehicle vehicle : dealer1.getVehicleInventory()) {
 				dealer2.addIncomingVehicle(vehicle);

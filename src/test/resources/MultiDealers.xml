@@ -1,6 +1,6 @@
 <Dealers>
 	<Dealer id="1">
-		<Name>Wacky Bob’s Automall</Name>
+		<Name>Wacky Dealer One</Name>
 		<Vehicle type="suv" id="a">
 			<Price unit="pounds">17000</Price>
 			<Make>Land Rover</Make>
@@ -23,7 +23,7 @@
 		</Vehicle>
 	</Dealer>
 	<Dealer id="2">
-		<Name>Wacky Bob’s Automall</Name>
+		<Name>Quirky Dealer Two</Name>
 		<Vehicle type="suv" id="1">
 			<Price unit="pounds">17000</Price>
 			<Make>Land Rover</Make>

@@ -1,6 +1,6 @@
 <Dealers>
 	<Dealer id="485">
-		<Name>Wacky Bob’s Automall</Name>
+		<Name>Zany Dealer Xero</Name>
 		<Vehicle type="suv" id="848432">
 			<Price unit="pounds">17000</Price>
 			<Make>Land Rover</Make>
