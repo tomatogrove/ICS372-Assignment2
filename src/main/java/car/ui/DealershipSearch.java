@@ -186,7 +186,11 @@ public class DealershipSearch extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(this,"Dealer information exported!");
 					break;
 				case "Specific Vehicle":
-					NavigationManager.changePanel(new EditSpecificVehicle(dealer));
+					if (dealer.getVehicleInventory().size() > 0) {
+						NavigationManager.changePanel(new EditSpecificVehicle(dealer));
+					} else {
+						JOptionPane.showMessageDialog(this, "Dealer has no vehicles in inventory.");
+					}
 			}
 		}
 	}

@@ -1,7 +1,9 @@
 package car.inventory;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DealerGroup {
 
@@ -33,8 +35,8 @@ public class DealerGroup {
 		return sb.toString();
 	}
 
-	public List<String> addIncomingVehicles(List<Vehicle> vehicles) {
-		List<String> disabledDealers = new ArrayList<>();
+	public Set<String> addIncomingVehicles(List<Vehicle> vehicles) {
+		Set<String> disabledDealers = new HashSet<>();
 		for (Vehicle vehicle : vehicles) {
 
 			Dealership dealer = getDealerByID(vehicle.getDealershipID());
@@ -53,8 +55,8 @@ public class DealerGroup {
 		return disabledDealers;
 	}
 
-	public List<String> addIncomingDealers(List<Dealership> dealers) {
-		List<String> disabledDealers = new ArrayList<>();
+	public Set<String> addIncomingDealers(List<Dealership> dealers) {
+		Set<String> disabledDealers = new HashSet<>();
 		for (Dealership dealer : dealers) {
 			Dealership oldDealer = getDealerByID(dealer.getDealerID());
 			if (oldDealer != null) {
@@ -63,7 +65,7 @@ public class DealerGroup {
 			} else {
 				this.dealers.add(dealer);
 			}
-			disabledDealers.addAll(new ArrayList<>(addIncomingVehicles(dealer.getVehicleInventory())));
+			disabledDealers.addAll(addIncomingVehicles(new ArrayList<>(dealer.getVehicleInventory())));
 		}
 		return disabledDealers;
 	}

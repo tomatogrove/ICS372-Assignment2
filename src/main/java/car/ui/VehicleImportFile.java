@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 
 public class VehicleImportFile extends JPanel {
@@ -61,7 +62,7 @@ public class VehicleImportFile extends JPanel {
 			if (response == JFileChooser.APPROVE_OPTION) {
 				filepath = new File(file.getSelectedFile().getAbsolutePath());
 				dealers = VehicleXMLParser.read(filepath);
-				List<String> disabledDealers= StateManager.dealerGroup.addIncomingDealers(dealers);
+				Set<String> disabledDealers= StateManager.dealerGroup.addIncomingDealers(dealers);
 				if (disabledDealers.size() > 0) {
 					String concatDealers = String.join(", ", disabledDealers);
 					JOptionPane.showMessageDialog(this,"Dealer Vehicle Acquisition disabled for the following Dealer(s): "
@@ -83,7 +84,7 @@ public class VehicleImportFile extends JPanel {
 			if (response == JFileChooser.APPROVE_OPTION) {
 				filepath = new File(file.getSelectedFile().getAbsolutePath());
 				vehicles = VehicleJSONParser.read(filepath);
-				List<String> disabledDealers= StateManager.dealerGroup.addIncomingVehicles(vehicles);
+				Set<String> disabledDealers= StateManager.dealerGroup.addIncomingVehicles(vehicles);
 				if (disabledDealers.size() > 0) {
 					String concatDealers = String.join(", ", disabledDealers);
 					JOptionPane.showMessageDialog(this,"Dealer Vehicle Acquisition disabled for the following Dealer(s): "

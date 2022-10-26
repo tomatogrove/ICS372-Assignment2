@@ -20,7 +20,7 @@ public class NavigationManager extends JFrame {
     private static void setUpFrame() {
         StateManager.load();
 
-        frame = new JFrame("The Container");
+        frame = new JFrame("Dealership Inventory Program");
         frame.setSize(650, 500);
 
         // code found https://www.codejava.net/java-se/swing/preventing-jframe-window-from-closing
