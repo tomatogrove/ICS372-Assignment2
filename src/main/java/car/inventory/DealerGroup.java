@@ -63,7 +63,7 @@ public class DealerGroup {
 			} else {
 				this.dealers.add(dealer);
 			}
-			disabledDealers.addAll(addIncomingVehicles(dealer.getVehicleInventory()));
+			disabledDealers.addAll(new ArrayList<>(addIncomingVehicles(dealer.getVehicleInventory())));
 		}
 		return disabledDealers;
 	}
